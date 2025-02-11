@@ -3,7 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { draftMode } from "next/headers";
-import { toPlainText,VisualEditing } from "next-sanity";
+import { toPlainText, VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
 
 import DraftModeToast from "@/components/DraftModeToast";
@@ -65,7 +65,10 @@ export default async function RootLayout({
   const { isEnabled: isDraftMode } = await draftMode();
 
   return (
-    <html lang="en" className={`${inter.variable} bg-amber-900/80  text-stone-100 dark`}>
+    <html
+      lang="en"
+      className={`${inter.variable} dark bg-amber-900/80 text-stone-100`}
+    >
       <body>
         <section className="min-h-screen pt-24">
           {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
@@ -83,7 +86,6 @@ export default async function RootLayout({
           <main className="">{children}</main>
           <Footer />
         </section>
-        
       </body>
     </html>
   );

@@ -1,5 +1,7 @@
 //skipped reactCompiler
 // compare * as tseslint from other project
+// Did not use nextPlugin as it's pre loaded
+// Did not use reactHooks
 import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import tseslint from "@typescript-eslint/eslint-plugin";
@@ -26,6 +28,7 @@ export default [
       globals: {
         React: true,
         JSX: true,
+        URL: 'readonly',
       },
     },
     plugins: {
@@ -34,9 +37,20 @@ export default [
       prettier: prettierPlugin,
     },
     rules: {
-      "@typescript-eslint/no-unused-vars": "warn",
+      "prettier/prettier": "error",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_' },
+      ],
+      'no-console': 'off',
+    },
+    settings: {
+      react: {
+        version: "detect"
+      }
     },
   },
 ];

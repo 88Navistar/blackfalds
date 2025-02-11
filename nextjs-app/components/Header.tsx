@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Header() {
   return (
-    <header className="fixed z-50 h-24 inset-0 flex items-center backdrop-blur-lg">
+    <header className="fixed inset-0 z-50 flex h-24 items-center backdrop-blur-lg">
       <div className="container py-6 sm:px-6">
         <div className="flex items-center justify-between gap-5">
           <Link className="flex items-center gap-2" href="/">
@@ -10,7 +10,7 @@ export default function Header() {
               viewBox="0 0 128 128"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              className="text-red-500 h-7 sm:h-10 rounded-full"
+              className="h-7 rounded-full text-red-500 sm:h-10"
             >
               <title>Sanity</title>
               <g clipPath="url(#clip0_1_821)">
@@ -38,14 +38,14 @@ export default function Header() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="text-black/70 h-5"
+              className="h-5 text-black/70"
             >
               <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
             </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 256 256"
-              className="text-[#000] h-7 sm:h-10"
+              className="h-7 text-[#000] sm:h-10"
               fill="currentColor"
             >
               <g>
@@ -55,7 +55,7 @@ export default function Header() {
                 ></path>
               </g>
             </svg>
-            <span className="hidden lg:block text-lg pl-2 font-semibold">
+            <span className="hidden pl-2 text-lg font-semibold lg:block">
               Sanity + Next.js
             </span>
           </Link>
@@ -63,7 +63,7 @@ export default function Header() {
           <nav className="">
             <ul
               role="list"
-              className="flex items-center gap-4 md:gap-6 leading-5 text-sm md:text-base tracking-tight font-normal"
+              className="flex items-center gap-4 text-sm leading-5 font-normal tracking-tight md:gap-6 md:text-base"
             >
               <li>
                 <Link href="/about" className="">
@@ -71,9 +71,9 @@ export default function Header() {
                 </Link>
               </li>
 
-              <li className="sm:before:w-[1px] sm:before:bg-gray-100 before:block flex sm:gap-4 md:gap-6">
+              <li className="flex before:block sm:gap-4 sm:before:w-[1px] sm:before:bg-gray-100 md:gap-6">
                 <Link
-                  className="rounded-full flex gap-2 items-center bg-black hover:bg-red-500 focus:bg-cyan-500 p-1 sm:py-3 sm:px-6 text-white transition-colors duration-200"
+                  className="flex items-center gap-2 rounded-full bg-black p-1 text-white transition-colors duration-200 hover:bg-red-500 focus:bg-cyan-500 sm:px-6 sm:py-3"
                   href="https://github.com/sanity-io/sanity-template-nextjs-clean"
                   target="_blank"
                   rel="noopener noreferrer"
