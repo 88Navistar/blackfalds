@@ -7,7 +7,9 @@
   ---break---
 */
 @custom-variant dark (&:is(.dark *));
+@theme {
 
+}
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -59,7 +61,7 @@
   ---break---
 */
 .dark {
-  --background: hsl(20 14.3% 4.1%);
+  --background: oklch(.421 .055 57.708);
   --foreground: hsl(60 9.1% 97.8%);
   --card: hsl(20 14.3% 4.1%);
   --card-foreground: hsl(60 9.1% 97.8%);
@@ -123,8 +125,5 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
