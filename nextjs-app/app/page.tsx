@@ -7,7 +7,7 @@ import { AllPosts } from "@/components/Posts";
 export default async function Page() {
   return (
     <>
-      <div className="border-gray-10 border-t">
+      <div className="border-gray-10 min-h-dvh border-t">
         <div className="mx-auto px-4">
           <Image
             src="/images/street-scene-blackfalds.webp"
