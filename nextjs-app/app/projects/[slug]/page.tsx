@@ -5,8 +5,8 @@ import { Suspense } from "react";
 
 import Avatar from "@/components/Avatar";
 import CoverImage from "@/components/CoverImage";
-import { MorePosts } from "@/components/Posts";
 import PortableText from "@/components/PortableText";
+import { MorePosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { postPagesSlugs, postQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
  */
 export async function generateMetadata(
   props: Props,
-  parent: ResolvingMetadata,
+  parent: ResolvingMetadata
 ): Promise<Metadata> {
   const params = await props.params;
   const { data: post } = await sanityFetch({
@@ -73,15 +73,15 @@ export default async function PostPage(props: Props) {
   return (
     <>
       <div className="">
-        <div className="container my-12 lg:my-24 grid gap-12">
+        <div className="container my-12 grid gap-12 lg:my-24">
           <div>
-            <div className="pb-6 grid gap-6 mb-6 border-b border-gray-100">
-              <div className="max-w-3xl flex flex-col gap-6">
+            <div className="mb-6 grid gap-6 border-b border-gray-100 pb-6">
+              <div className="flex max-w-3xl flex-col gap-6">
                 <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
                   {post.title}
                 </h2>
               </div>
-              <div className="max-w-3xl flex gap-4 items-center">
+              <div className="flex max-w-3xl items-center gap-4">
                 {post.author &&
                   post.author.firstName &&
                   post.author.lastName && (
@@ -89,7 +89,7 @@ export default async function PostPage(props: Props) {
                   )}
               </div>
             </div>
-            <article className="gap-6 grid max-w-4xl">
+            <article className="grid max-w-4xl gap-6">
               <div className="">
                 <CoverImage image={post.coverImage} priority />
               </div>
@@ -104,7 +104,7 @@ export default async function PostPage(props: Props) {
         </div>
       </div>
       <div className="border-t border-gray-100">
-        <div className="container my-12 lg:my-24 grid gap-12">
+        <div className="container my-12 grid gap-12 lg:my-24">
           <aside>
             <Suspense>{await MorePosts({ skip: post._id, limit: 2 })}</Suspense>
           </aside>

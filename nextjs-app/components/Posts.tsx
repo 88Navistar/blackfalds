@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { sanityFetch } from "@/sanity/lib/live";
-import { morePostsQuery, allPostsQuery } from "@/sanity/lib/queries";
-import { Post as PostType } from "@/sanity.types";
 import DateComponent from "@/components/Date";
 import OnBoarding from "@/components/Onboarding";
+import { Post as PostType } from "@/sanity.types";
+import { sanityFetch } from "@/sanity/lib/live";
+import { allPostsQuery, morePostsQuery } from "@/sanity/lib/queries";
 
 const Post = ({ post }: { post: PostType }) => {
   const { _id, title, slug, excerpt, date } = post;
@@ -14,13 +14,13 @@ const Post = ({ post }: { post: PostType }) => {
       key={_id}
       className="flex max-w-xl flex-col items-start justify-between"
     >
-      <div className="text-gray-500 text-sm">
+      <div className="text-sm text-gray-500">
         <DateComponent dateString={date} />
       </div>
 
       <h3 className="mt-3 text-2xl font-semibold">
         <Link
-          className="hover:text-red-500 underline transition-colors"
+          className="underline transition-colors hover:text-red-500"
           href={`/posts/${slug}`}
         >
           {title}
@@ -51,7 +51,7 @@ const Posts = ({
     {subHeading && (
       <p className="mt-2 text-lg leading-8 text-gray-600">{subHeading}</p>
     )}
-    <div className="mt-6 pt-6 space-y-12 border-t border-gray-200">
+    <div className="mt-6 space-y-12 border-t border-gray-200 pt-6">
       {children}
     </div>
   </div>

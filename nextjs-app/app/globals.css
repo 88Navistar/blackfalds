@@ -9,6 +9,18 @@
 @custom-variant dark (&:is(.dark *));
 @theme {
 
+   --color-brawn-50: oklch(96.27% 0.019 72.58);
+  --color-brawn-100: oklch(93.25% 0.036 75.55);
+  --color-brawn-200: oklch(86.42% 0.071 73.63);
+  --color-brawn-300: oklch(79.98% 0.105 72.82);
+  --color-brawn-400: oklch(73.63% 0.133 69.5);
+  --color-brawn-500: oklch(65% 0.132 67.06);
+  --color-brawn-600: oklch(55.51% 0.111 68.32);
+  --color-brawn-700: oklch(45.2% 0.089 67.69);
+  --color-brawn-800: oklch(34.47% 0.065 68.49);
+  --color-brawn-900: oklch(22.69% 0.037 71.24);
+  --color-brawn-950: oklch(15.45% 0.022 79.91);
+
 }
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,
@@ -61,7 +73,7 @@
   ---break---
 */
 .dark {
-  --background: oklch(.421 .055 57.708);
+  --background: oklch(22.69% 0.037 71.24);
   --foreground: hsl(60 9.1% 97.8%);
   --card: hsl(20 14.3% 4.1%);
   --card-foreground: hsl(60 9.1% 97.8%);
@@ -126,4 +138,15 @@
   * {
     @apply border-border outline-ring/50;
   }
+
+}
+/*
+  ---break---
+*/
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+
+   }
+
 }

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Head from "next/head";
 
+import { PageOnboarding } from "@/components/Onboarding";
 import PageBuilderPage from "@/components/PageBuilder";
+import { GetPageQueryResult } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
 import { getPageQuery, pagesSlugs } from "@/sanity/lib/queries";
-import { GetPageQueryResult } from "@/sanity.types";
-import { PageOnboarding } from "@/components/Onboarding";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -65,12 +65,12 @@ export default async function Page(props: Props) {
       </Head>
       <div className="">
         <div className="container">
-          <div className="pb-6 border-b border-gray-100">
+          <div className="border-b border-gray-100 pb-6">
             <div className="max-w-3xl">
               <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
                 {page.heading}
               </h2>
-              <p className="mt-4 text-base lg:text-lg leading-relaxed text-gray-600 uppercase font-light">
+              <p className="mt-4 text-base leading-relaxed font-light text-gray-600 uppercase lg:text-lg">
                 {page.subheading}
               </p>
             </div>
