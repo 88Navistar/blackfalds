@@ -5,7 +5,8 @@ import { Suspense } from "react";
 
 import Avatar from "@/components/Avatar";
 import CoverImage from "@/components/CoverImage";
-import PortableText from "@/components/PortableText";
+import Modules from "@/components/modules/index";
+import CustomPortableText from "@/components/PortableText";
 import { MorePosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { postPagesSlugs, postQuery } from "@/sanity/lib/queries";
@@ -72,12 +73,12 @@ export default async function PostPage(props: Props) {
 
   return (
     <>
-      <div className="">
-        <div className="container my-12 grid gap-12 lg:my-24">
+      <div className="mx-auto flex max-w-7xl flex-col items-center">
+        <div className="my-12 grid gap-12 lg:my-24">
           <div>
             <div className="mb-6 grid gap-6 border-b border-gray-100 pb-6">
               <div className="flex max-w-3xl flex-col gap-6">
-                <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-7xl">
+                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
                   {post.title}
                 </h2>
               </div>
@@ -94,11 +95,14 @@ export default async function PostPage(props: Props) {
                 <CoverImage image={post.coverImage} priority />
               </div>
               {post.content?.length && (
-                <PortableText
-                  className="max-w-2xl"
+                <CustomPortableText
+                  className="max-w-3xl"
                   value={post.content as PortableTextBlock[]}
                 />
               )}
+              <section>
+                {post.modules && <Modules modules={post.modules} />}
+              </section>
             </article>
           </div>
         </div>

@@ -75,6 +75,7 @@ export const morePostsQuery = defineQuery(`
 
 export const postQuery = defineQuery(`
   *[_type == "post" && slug.current == $slug] [0] {
+    ${postFields}
     content[]{
     ...,
     markDefs[]{
@@ -82,7 +83,35 @@ export const postQuery = defineQuery(`
       ${linkReference}
     }
   },
-    ${postFields}
+  modules[]{
+      ...,
+      _type == "moduleBlock" => {
+        _type,
+        content[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference}
+          }
+        }
+      },
+      _type == "fullWidthImage" => {
+        _type,
+        title,
+        description,
+        caption,
+        image,
+        "alt": image.alt,
+        "hotspot": image.hotspot,
+        "crop": image.crop
+      },
+      _type == "textWrapImage" => {
+        _type,
+        image,
+        content,
+        alignment,
+      }
+    }
   }
 `);
 

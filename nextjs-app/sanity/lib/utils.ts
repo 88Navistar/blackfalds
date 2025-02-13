@@ -1,14 +1,15 @@
 import createImageUrlBuilder from "@sanity/image-url";
+import { createDataAttribute, CreateDataAttributeProps } from "next-sanity";
+import { Image } from "sanity";
+
 import { Link } from "@/sanity.types";
 import { dataset, projectId, studioUrl } from "@/sanity/lib/api";
-import { createDataAttribute, CreateDataAttributeProps } from "next-sanity";
-
 const imageBuilder = createImageUrlBuilder({
   projectId: projectId || "",
   dataset: dataset || "",
 });
 
-export const urlForImage = (source: any) => {
+export const urlForImage = (source: Image) => {
   // Ensure that source image contains a valid reference
   if (!source?.asset?._ref) {
     return undefined;
@@ -40,10 +41,17 @@ export function linkResolver(link: Link | undefined) {
       if (link?.page && typeof link.page === "string") {
         return `/${link.page}`;
       }
+      break;
     case "post":
       if (link?.post && typeof link.post === "string") {
-        return `/posts/${link.post}`;
+        return `/projects/${link.post}`;
       }
+      break;
+    case "mail":
+      if (link?.mail && typeof link.mail === "string") {
+        return `mailto:${link.mail}`;
+      }
+      break;
     default:
       return null;
   }

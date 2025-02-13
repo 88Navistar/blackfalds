@@ -68,9 +68,119 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type TextWrapImage = {
+  _type: "textWrapImage";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    caption?: string;
+    _type: "image";
+  };
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      linkType?: "href" | "page" | "post" | "mail";
+      href?: string;
+      page?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      post?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      };
+      mail?: string;
+      openInNewTab?: boolean;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  alignment?: "left" | "right";
+  width?: "small" | "medium" | "large";
+};
+
+export type ModuleBlock = {
+  _type: "moduleBlock";
+  title?: string;
+  subtitle?: string;
+  content?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      linkType?: "href" | "page" | "post" | "mail";
+      href?: string;
+      page?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "page";
+      };
+      post?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "post";
+      };
+      mail?: string;
+      openInNewTab?: boolean;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+};
+
+export type FullWidthImage = {
+  _type: "fullWidthImage";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  caption?: string;
+};
+
 export type CallToAction = {
   _type: "callToAction";
-  heading: string;
+  heading?: string;
   text?: string;
   buttonText?: string;
   link?: Link;
@@ -109,7 +219,7 @@ export type InfoSection = {
     style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
     listItem?: "bullet" | "number";
     markDefs?: Array<{
-      linkType?: "href" | "page" | "post";
+      linkType?: "href" | "page" | "post" | "mail";
       href?: string;
       page?: {
         _ref: string;
@@ -123,6 +233,7 @@ export type InfoSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "post";
       };
+      mail?: string;
       openInNewTab?: boolean;
       _type: "link";
       _key: string;
@@ -143,7 +254,7 @@ export type BlockContent = Array<{
   style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
   listItem?: "bullet" | "number";
   markDefs?: Array<{
-    linkType?: "href" | "page" | "post";
+    linkType?: "href" | "page" | "post" | "mail";
     href?: string;
     page?: {
       _ref: string;
@@ -157,6 +268,7 @@ export type BlockContent = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "post";
     };
+    mail?: string;
     openInNewTab?: boolean;
     _type: "link";
     _key: string;
@@ -172,9 +284,9 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
-  slug: Slug;
-  heading: string;
+  name?: string;
+  slug?: Slug;
+  heading?: string;
   subheading?: string;
   pageBuilder?: Array<
     | ({
@@ -192,11 +304,9 @@ export type Post = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
-  content?: BlockContent;
-  excerpt?: string;
-  coverImage: {
+  title?: string;
+  slug?: Slug;
+  coverImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -208,6 +318,18 @@ export type Post = {
     alt?: string;
     _type: "image";
   };
+  modules?: Array<
+    | ({
+        _key: string;
+      } & ModuleBlock)
+    | ({
+        _key: string;
+      } & FullWidthImage)
+    | ({
+        _key: string;
+      } & TextWrapImage)
+  >;
+  excerpt?: string;
   date?: string;
   author?: {
     _ref: string;
@@ -223,9 +345,9 @@ export type Person = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  picture: {
+  firstName?: string;
+  lastName?: string;
+  picture?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -241,7 +363,7 @@ export type Person = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -251,7 +373,7 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -262,7 +384,7 @@ export type Settings = {
     style?: "normal";
     listItem?: never;
     markDefs?: Array<{
-      href: string;
+      href?: string;
       _type: "link";
       _key: string;
     }>;
@@ -382,7 +504,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: "sanity.assist.instruction.context";
-  reference: {
+  reference?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -415,7 +537,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: "sanity.assist.instruction.userInput";
-  message: string;
+  message?: string;
   description?: string;
 };
 
@@ -483,6 +605,9 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | TextWrapImage
+  | ModuleBlock
+  | FullWidthImage
   | CallToAction
   | Link
   | InfoSection
@@ -519,7 +644,7 @@ export type SettingsQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -530,7 +655,7 @@ export type SettingsQueryResult = {
     style?: "normal";
     listItem?: never;
     markDefs?: Array<{
-      href: string;
+      href?: string;
       _type: "link";
       _key: string;
     }>;
@@ -557,15 +682,15 @@ export type SettingsQueryResult = {
 export type GetPageQueryResult = {
   _id: string;
   _type: "page";
-  name: string;
-  slug: Slug;
-  heading: string;
+  name: string | null;
+  slug: Slug | null;
+  heading: string | null;
   subheading: string | null;
   pageBuilder: Array<
     | {
         _key: string;
         _type: "callToAction";
-        heading: string;
+        heading?: string;
         text?: string;
         buttonText?: string;
         link: {
@@ -600,10 +725,11 @@ export type GetPageQueryResult = {
             | "normal";
           listItem?: "bullet" | "number";
           markDefs: Array<{
-            linkType?: "href" | "page" | "post";
+            linkType?: "href" | "mail" | "page" | "post";
             href?: string;
             page: string | null;
             post: string | null;
+            mail?: string;
             openInNewTab?: boolean;
             _type: "link";
             _key: string;
@@ -619,12 +745,12 @@ export type GetPageQueryResult = {
 // Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
   | {
-      slug: string;
+      slug: string | null;
       _type: "page";
       _updatedAt: string;
     }
   | {
-      slug: string;
+      slug: string | null;
       _type: "post";
       _updatedAt: string;
     }
@@ -634,8 +760,8 @@ export type SitemapDataResult = Array<
 export type AllPostsQueryResult = Array<{
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -648,11 +774,11 @@ export type AllPostsQueryResult = Array<{
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -664,7 +790,7 @@ export type AllPostsQueryResult = Array<{
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
 }>;
 // Variable: morePostsQuery
@@ -672,8 +798,8 @@ export type AllPostsQueryResult = Array<{
 export type MorePostsQueryResult = Array<{
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -686,11 +812,11 @@ export type MorePostsQueryResult = Array<{
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -702,38 +828,16 @@ export type MorePostsQueryResult = Array<{
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
 }>;
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  }
+// Query: *[_type == "post" && slug.current == $slug] [0] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},    content[]{    ...,    markDefs[]{      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }    }  },  modules[]{      ...,      _type == "moduleBlock" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "fullWidthImage" => {        _type,        title,        description,        caption,        image,        "alt": image.alt,        "hotspot": image.hotspot,        "crop": image.crop      },      _type == "textWrapImage" => {        _type,        image,        content,        alignment,      }    }  }
 export type PostQueryResult = {
-  content: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs: Array<{
-      linkType?: "href" | "page" | "post";
-      href?: string;
-      page: string | null;
-      post: string | null;
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }> | null;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -746,11 +850,11 @@ export type PostQueryResult = {
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -762,18 +866,140 @@ export type PostQueryResult = {
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
+  content: null;
+  modules: Array<
+    | {
+        _key: string;
+        _type: "fullWidthImage";
+        title: string | null;
+        description: string | null;
+        image: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          _type: "image";
+        } | null;
+        caption: string | null;
+        alt: string | null;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+      }
+    | {
+        _key: string;
+        _type: "moduleBlock";
+        title?: string;
+        subtitle?: string;
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "blockquote"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "normal";
+          listItem?: "bullet" | "number";
+          markDefs: Array<{
+            linkType?: "href" | "mail" | "page" | "post";
+            href?: string;
+            page: string | null;
+            post: string | null;
+            mail?: string;
+            openInNewTab?: boolean;
+            _type: "link";
+            _key: string;
+          }> | null;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+      }
+    | {
+        _key: string;
+        _type: "textWrapImage";
+        image: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          alt?: string;
+          caption?: string;
+          _type: "image";
+        } | null;
+        content: Array<{
+          children?: Array<{
+            marks?: Array<string>;
+            text?: string;
+            _type: "span";
+            _key: string;
+          }>;
+          style?:
+            | "blockquote"
+            | "h1"
+            | "h2"
+            | "h3"
+            | "h4"
+            | "h5"
+            | "h6"
+            | "normal";
+          listItem?: "bullet" | "number";
+          markDefs?: Array<{
+            linkType?: "href" | "mail" | "page" | "post";
+            href?: string;
+            page?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "page";
+            };
+            post?: {
+              _ref: string;
+              _type: "reference";
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: "post";
+            };
+            mail?: string;
+            openInNewTab?: boolean;
+            _type: "link";
+            _key: string;
+          }>;
+          level?: number;
+          _type: "block";
+          _key: string;
+        }> | null;
+        alignment: "left" | "right" | null;
+        width?: "large" | "medium" | "small";
+      }
+  > | null;
 } | null;
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
-  slug: string;
+  slug: string | null;
 }>;
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
-  slug: string;
+  slug: string | null;
 }>;
 
 // Query TypeMap
@@ -785,7 +1011,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult;
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult;
-    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': PostQueryResult;
+    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n    content[]{\n    ...,\n    markDefs[]{\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n    }\n  },\n  modules[]{\n      ...,\n      _type == "moduleBlock" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "fullWidthImage" => {\n        _type,\n        title,\n        description,\n        caption,\n        image,\n        "alt": image.alt,\n        "hotspot": image.hotspot,\n        "crop": image.crop\n      },\n      _type == "textWrapImage" => {\n        _type,\n        image,\n        content,\n        alignment,\n      }\n    }\n  }\n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult;
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult;
   }

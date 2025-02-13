@@ -1,6 +1,6 @@
 import {DocumentTextIcon} from '@sanity/icons'
 import {format, parseISO} from 'date-fns'
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 /**
  * Post schema.  Define and edit the fields for the 'post' content type.
@@ -32,16 +32,6 @@ export const post = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'blockContent',
-    }),
-    defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      type: 'text',
-    }),
-    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',
@@ -70,6 +60,22 @@ export const post = defineType({
       ],
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'modules',
+      title: 'Modules & Blocks',
+      type: 'array',
+      of: [
+        {type: 'moduleBlock'}, // Reusable block content
+        {type: 'fullWidthImage'}, // Full width image
+        {type: 'textWrapImage'}, // Text wrap image
+      ],
+    }),
+    defineField({
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'text',
+    }),
+
     defineField({
       name: 'date',
       title: 'Date',

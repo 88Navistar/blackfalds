@@ -34,15 +34,15 @@ export const person = defineType({
           type: 'string',
           title: 'Alternative text',
           description: 'Important for SEO and accessibility.',
-          validation: (rule) => {
-            // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
-            return rule.custom((alt, context) => {
-              if ((context.document?.picture as any)?.asset?._ref && !alt) {
-                return 'Required'
-              }
-              return true
-            })
-          },
+          // validation: (rule) => {
+          //   // Custom validation to ensure alt text is provided if the image is present. https://www.sanity.io/docs/validation
+          //   return rule.custom((alt, context) => {
+          //     if ((context.document?.picture as any)?.asset?._ref && !alt) {
+          //       return 'Required'
+          //     }
+          //     return true
+          //   })
+          // },
         }),
       ],
       options: {
@@ -51,7 +51,7 @@ export const person = defineType({
           imageDescriptionField: 'alt',
         },
       },
-      validation: (rule) => rule.required(),
+      // validation: (rule) => rule.required(),
     }),
   ],
   // List preview configuration. https://www.sanity.io/docs/previews-list-views

@@ -36,6 +36,7 @@ export const blockContent = defineType({
                     {title: 'URL', value: 'href'},
                     {title: 'Page', value: 'page'},
                     {title: 'Post', value: 'post'},
+                    {title: 'Email', value: 'mail'},
                   ],
                   layout: 'radio',
                 },
@@ -80,6 +81,12 @@ export const blockContent = defineType({
                     }
                     return true
                   }),
+              }),
+              defineField({
+                name: 'mail',
+                title: 'Email',
+                type: 'string',
+                hidden: ({parent}) => parent?.linkType !== 'mail',
               }),
               defineField({
                 name: 'openInNewTab',

@@ -14,19 +14,19 @@ const Post = ({ post }: { post: PostType }) => {
       key={_id}
       className="flex max-w-xl flex-col items-start justify-between"
     >
-      <div className="text-sm text-gray-500">
+      <div className="text-sm text-green-300/50">
         <DateComponent dateString={date} />
       </div>
 
       <h3 className="mt-3 text-2xl font-semibold">
         <Link
           className="underline transition-colors hover:text-red-500"
-          href={`/posts/${slug}`}
+          href={`/projects/${slug}`}
         >
           {title}
         </Link>
       </h3>
-      <p className="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+      <p className="mt-5 line-clamp-3 text-sm leading-6 text-stone-200">
         {excerpt}
       </p>
     </article>

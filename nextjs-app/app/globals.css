@@ -3,10 +3,12 @@
   ---break---
 */
 @plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
 /*
   ---break---
 */
 @custom-variant dark (&:is(.dark *));
+
 @theme {
 
    --color-brawn-50: oklch(96.27% 0.019 72.58);
@@ -149,4 +151,13 @@
 
    }
 
+}
+
+/* Add explicit float utilities */
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
 }
