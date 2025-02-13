@@ -1,13 +1,13 @@
 import { Suspense } from "react";
 
+import { ContainerMD } from "@/components/ContainerMD";
 import { AllPosts } from "@/components/Posts";
-
 export default async function ProjectsPage() {
   return (
-    <div className="container">
+    <ContainerMD className="">
       <aside className="py-12 sm:py-20">
         <Suspense fallback={null}>{await AllPosts()}</Suspense>
       </aside>
-    </div>
+    </ContainerMD>
   );
 }

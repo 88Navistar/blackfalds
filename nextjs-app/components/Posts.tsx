@@ -2,34 +2,48 @@ import Link from "next/link";
 
 import DateComponent from "@/components/Date";
 import OnBoarding from "@/components/Onboarding";
+import PostsImage from "@/components/PostsImage";
 import { Post as PostType } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
 import { allPostsQuery, morePostsQuery } from "@/sanity/lib/queries";
 
+import { Card, CardContent, CardHeader } from "./ui/card";
+
 const Post = ({ post }: { post: PostType }) => {
-  const { _id, title, slug, excerpt, date } = post;
+  const { _id, title, slug, excerpt, date, coverImage } = post;
 
   return (
-    <article
+    <Card
       key={_id}
-      className="flex max-w-xl flex-col items-start justify-between"
+      className="flex max-w-xl flex-col items-start justify-between border-stone-800 bg-stone-950/50"
     >
-      <div className="text-sm text-green-300/50">
-        <DateComponent dateString={date} />
-      </div>
+      {coverImage && (
+        <div className="w-full overflow-hidden rounded-t-lg">
+          <PostsImage image={coverImage} />
+        </div>
+      )}
 
-      <h3 className="mt-3 text-2xl font-semibold">
-        <Link
-          className="underline transition-colors hover:text-red-500"
-          href={`/projects/${slug}`}
-        >
-          {title}
-        </Link>
-      </h3>
-      <p className="mt-5 line-clamp-3 text-sm leading-6 text-stone-200">
-        {excerpt}
-      </p>
-    </article>
+      <CardHeader className="space-y-2">
+        <div className="text-sm text-green-300/50">
+          <DateComponent dateString={date} />
+        </div>
+
+        <h3 className="text-2xl font-semibold">
+          <Link
+            className="underline transition-colors hover:text-red-500"
+            href={`/projects/${slug}`}
+          >
+            {title}
+          </Link>
+        </h3>
+      </CardHeader>
+
+      <CardContent>
+        <p className="line-clamp-3 text-sm leading-6 text-stone-200">
+          {excerpt}
+        </p>
+      </CardContent>
+    </Card>
   );
 };
 
@@ -41,6 +55,7 @@ const Posts = ({
   children: React.ReactNode;
   heading?: string;
   subHeading?: string;
+  coverImage?: any;
 }) => (
   <div>
     {heading && (
@@ -89,7 +104,7 @@ export const AllPosts = async () => {
 
   return (
     <Posts
-      heading="Recent Posts"
+      heading="Recent Updates"
       subHeading={`${data.length === 1 ? "This blog post is" : `Project Posts ${data.length} `} .`}
     >
       {data.map((post: any) => (
