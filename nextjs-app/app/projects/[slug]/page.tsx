@@ -4,6 +4,7 @@ import { type PortableTextBlock } from "next-sanity";
 import { Suspense } from "react";
 
 import Avatar from "@/components/Avatar";
+import { ContainerMD } from "@/components/ContainerMD";
 import CoverImage from "@/components/CoverImage";
 import Modules from "@/components/modules/index";
 import CustomPortableText from "@/components/PortableText";
@@ -73,16 +74,16 @@ export default async function PostPage(props: Props) {
 
   return (
     <>
-      <div className="mx-auto flex max-w-7xl flex-col items-center">
-        <div className="my-12 grid gap-12 lg:my-24">
+      <ContainerMD className="mx-auto flex flex-col items-center">
+        <div className="my-12 grid max-w-5xl gap-12 lg:my-24">
           <div>
             <div className="mb-6 grid gap-6 border-b border-gray-100 pb-6">
-              <div className="flex max-w-3xl flex-col gap-6">
+              <div className="flex flex-col gap-6">
                 <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
                   {post.title}
                 </h2>
               </div>
-              <div className="flex max-w-3xl items-center gap-4">
+              <div className="flex items-center gap-4">
                 {post.author &&
                   post.author.firstName &&
                   post.author.lastName && (
@@ -90,29 +91,23 @@ export default async function PostPage(props: Props) {
                   )}
               </div>
             </div>
-            <article className="grid max-w-4xl gap-6">
+            <article className="grid gap-6">
               <div className="">
                 <CoverImage image={post.coverImage} priority />
               </div>
-              {post.content?.length && (
-                <CustomPortableText
-                  className="max-w-3xl"
-                  value={post.content as PortableTextBlock[]}
-                />
-              )}
               <section>
                 {post.modules && <Modules modules={post.modules} />}
               </section>
             </article>
           </div>
         </div>
-      </div>
+      </ContainerMD>
       <div className="border-t border-gray-100">
-        <div className="container my-12 grid gap-12 lg:my-24">
+        <ContainerMD className="my-12 grid gap-12 lg:my-24">
           <aside>
             <Suspense>{await MorePosts({ skip: post._id, limit: 2 })}</Suspense>
           </aside>
-        </div>
+        </ContainerMD>
       </div>
     </>
   );

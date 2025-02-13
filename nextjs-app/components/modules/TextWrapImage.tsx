@@ -19,8 +19,7 @@ export default function TextWrapImage({
   alignment,
   width,
 }: TextWrapImageProps) {
-  // eslint-disable-next-line no-undef
-  console.log("image.asset too:", image.asset);
+  //console.log("image.asset too:", image.asset);
   return (
     <div className="clearfix">
       <Image

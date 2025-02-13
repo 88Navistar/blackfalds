@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { ContainerMD } from "@/components/ContainerMD";
 import { AllPosts } from "@/components/Posts";
 
 export default async function Page() {
@@ -17,11 +18,11 @@ export default async function Page() {
             height={1000}
           />
         </div>
-        <div className="container">
+        <ContainerMD className="">
           <aside className="py-12 sm:py-20">
             <Suspense fallback={null}>{await AllPosts()}</Suspense>
           </aside>
-        </div>
+        </ContainerMD>
       </div>
     </>
   );

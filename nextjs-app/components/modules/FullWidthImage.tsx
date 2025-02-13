@@ -18,8 +18,7 @@ export default function FullWidthImage({
   caption,
   alt,
 }: FullWidthImageProps) {
-  // eslint-disable-next-line no-undef
-  console.log("image.asset:", image.asset);
+  //console.log("image.asset:", image.asset);
 
   return (
     <ContainerMD className="mx-auto flex flex-col items-center justify-center py-12 lg:py-24">
