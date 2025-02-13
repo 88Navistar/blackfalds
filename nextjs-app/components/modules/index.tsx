@@ -1,7 +1,7 @@
+import CarouselOne from "@/components/modules/carousel-one";
 import FullWidthImage from "@/components/modules/FullWidthImage";
 import TextWrapImage from "@/components/modules/TextWrapImage";
 import CustomPortableText from "@/components/PortableText";
-
 type Module<T = any> = {
   _type: string;
   _key: string;
@@ -18,6 +18,8 @@ export function ModuleContent({ module }: { module: Module }) {
       return <CustomPortableText value={module.content} key={module._key} />;
     case "textWrapImage":
       return <TextWrapImage {...module} key={module._key} />;
+    case "carouselOne":
+      return <CarouselOne block={module} key={module._key} />;
     default:
       return null;
   }

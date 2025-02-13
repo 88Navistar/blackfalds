@@ -12,8 +12,6 @@ interface FullWidthImageProps {
 }
 
 export default function FullWidthImage({
-  title,
-  description,
   image,
   caption,
   alt,
@@ -21,8 +19,8 @@ export default function FullWidthImage({
   //console.log("image.asset:", image.asset);
 
   return (
-    <ContainerMD className="mx-auto flex flex-col items-center justify-center py-12 lg:py-24">
-      <div className="prose max-w-[70ch] text-lg xl:text-xl dark:prose-invert">
+    <ContainerMD className="mx-auto flex flex-col items-center justify-center py-6 lg:py-12">
+      {/* <div className="prose max-w-[70ch] text-lg xl:text-xl dark:prose-invert">
         {title && (
           <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-200">
             {title}
@@ -31,7 +29,7 @@ export default function FullWidthImage({
         {description && (
           <p className="text-slate-700 dark:text-slate-300">{description}</p>
         )}
-      </div>
+      </div> */}
       {image && (
         <div className="w-full">
           <Image

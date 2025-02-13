@@ -90,8 +90,6 @@ export const postQuery = defineQuery(`
       },
       _type == "fullWidthImage" => {
         _type,
-        title,
-        description,
         caption,
         image{
           asset{
@@ -134,6 +132,28 @@ export const postQuery = defineQuery(`
           },
         },
         "alt": image.alt,
+      },
+      _type == "carouselOne" => {
+        ...,
+        _type,
+        size,
+        indicators,
+        images[]{
+      asset->{
+        _id,
+        url,
+        mimeType,
+        metadata {
+          lqip,
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      alt
+    },
+
       },
       }
       }

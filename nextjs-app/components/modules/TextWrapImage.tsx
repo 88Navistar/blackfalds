@@ -31,7 +31,9 @@ export default function TextWrapImage({
         width={image.assetData?.metadata?.dimensions?.width || 200}
         height={image.assetData?.metadata?.dimensions?.height || 200}
       />
-      <CustomPortableText value={content} />
+      <div className="text-balance">
+        <CustomPortableText value={content} />
+      </div>
     </div>
   );
 }

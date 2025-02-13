@@ -74,6 +74,7 @@ export const post = defineType({
         {type: 'moduleBlock'}, // Reusable block content
         {type: 'fullWidthImage'}, // Full width image
         {type: 'textWrapImage'}, // Text wrap image
+        {type: 'carouselOne'}, // Carousel
       ],
     }),
     defineField({
