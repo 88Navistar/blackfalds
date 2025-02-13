@@ -9,12 +9,14 @@ import {blockContent} from './objects/blockContent'
 import {fullWidthImage} from './modules/fullWidthImage'
 import {moduleBlock} from './modules/moduleBlock'
 import {textWrapImage} from './modules/textWrapImage'
+import {category} from './documents/category'
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/schema-types
 
 export const schemaTypes = [
   // Singletons
   settings,
   // Documents
+  category,
   page,
   post,
   person,
