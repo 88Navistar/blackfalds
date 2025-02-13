@@ -100,19 +100,52 @@ export const postQuery = defineQuery(`
         title,
         description,
         caption,
-        image,
+        image{
+          asset{
+            _ref,
+            _type,
+          },
+          "assetData": asset->{
+            url,
+            mimeType,
+            metadata {
+              lqip,
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+        },
         "alt": image.alt,
-        "hotspot": image.hotspot,
-        "crop": image.crop
       },
       _type == "textWrapImage" => {
         _type,
-        image,
         content,
         alignment,
+        image{
+          asset{
+            _ref,
+            _type,
+          },
+          "assetData": asset->{
+            url,
+            mimeType,
+            metadata {
+              lqip,
+              dimensions {
+                width,
+                height
+              }
+            }
+          },
+        },
+        "alt": image.alt,
+      },
       }
-    }
-  }
+      }
+    
+  
 `);
 
 export const postPagesSlugs = defineQuery(`

@@ -99,5 +99,10 @@ export const blockContent = defineType({
         ],
       },
     }),
+    defineArrayMember({
+      type: 'moduleContent',
+      name: 'moduleContent',
+      title: 'Module Content',
+    }),
   ],
 })

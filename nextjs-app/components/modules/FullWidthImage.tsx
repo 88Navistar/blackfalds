@@ -1,13 +1,14 @@
+import { stegaClean } from "@sanity/client/stega";
 import Image from "next/image";
 
 import { ContainerMD } from "@/components/ContainerMD";
 import { urlForImage } from "@/sanity/lib/utils";
-import { height, width } from "@/sanity/lib/utils";
 interface FullWidthImageProps {
   title?: string;
   description?: string;
   image?: any;
   caption?: string;
+  alt?: string;
 }
 
 export default function FullWidthImage({
@@ -15,7 +16,11 @@ export default function FullWidthImage({
   description,
   image,
   caption,
+  alt,
 }: FullWidthImageProps) {
+  // eslint-disable-next-line no-undef
+  console.log("image.asset:", image.asset);
+
   return (
     <ContainerMD className="mx-auto flex flex-col items-center justify-center py-12 lg:py-24">
       <div className="prose max-w-[70ch] text-lg xl:text-xl dark:prose-invert">
@@ -32,11 +37,10 @@ export default function FullWidthImage({
         <div className="w-full">
           <Image
             src={urlForImage(image)?.url() || ""}
-            alt={caption || title || "Full width image"}
-            layout="responsive"
-            // TODO: check if need to change query to get the correct dimensions
-            width={image.asset?.metadata?.dimensions?.width || 800}
-            height={image.asset?.metadata?.dimensions?.height || 800}
+            alt={stegaClean(alt || caption || "Full width image")}
+            width={image.assetData.metadata.dimensions.width || 800}
+            height={image.assetData.metadata.dimensions.height || 800}
+            className="h-auto w-full"
           />
         </div>
       )}

@@ -1,5 +1,8 @@
+import { stegaClean } from "@sanity/client/stega";
 import Image from "next/image";
-import { PortableText } from "next-sanity";
+
+import CustomPortableText from "@/components/PortableText";
+import { urlForImage } from "@/sanity/lib/utils";
 
 // Define the types locally
 export type ImageAlignment = "left" | "right";
@@ -10,23 +13,24 @@ export const IMAGE_WIDTH_CLASSES = {
   large: "w-3/4",
 } as const;
 
-import CustomPortableText from "@/components/PortableText";
-import { urlForImage } from "@/sanity/lib/utils";
-
 export default function TextWrapImage({
   image,
   content,
   alignment,
   width,
 }: TextWrapImageProps) {
+  // eslint-disable-next-line no-undef
+  console.log("image.asset too:", image.asset);
   return (
     <div className="clearfix">
       <Image
-        className={`float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} m-4`}
+        className={stegaClean(
+          `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} m-4`
+        )}
         src={urlForImage(image)?.url() || ""}
-        alt={image.alt}
-        width={image.asset?.metadata?.dimensions?.width || 200}
-        height={image.asset?.metadata?.dimensions?.height || 200}
+        alt={stegaClean(image.alt || "Historical Image")}
+        width={image.assetData?.metadata?.dimensions?.width || 200}
+        height={image.assetData?.metadata?.dimensions?.height || 200}
       />
       <CustomPortableText value={content} />
     </div>
