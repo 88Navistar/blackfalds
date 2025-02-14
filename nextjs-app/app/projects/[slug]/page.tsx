@@ -72,15 +72,13 @@ export default async function PostPage(props: Props) {
 
   return (
     <>
-      <ContainerMD className="mx-auto flex flex-col items-center">
-        <div className="my-12 grid max-w-5xl gap-12 lg:my-24">
-          <div>
-            <div className="mb-6 grid gap-6 border-b border-gray-100 pb-6">
-              <div className="flex flex-col gap-6">
-                <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
-                  {post.title}
-                </h2>
-              </div>
+      <div className="px-2">
+        <div className="my-12 space-y-12 lg:my-24">
+          <div className="space-y-6">
+            <div className="space-y-6 border-b border-gray-100 pb-6">
+              <h2 className="text-fluid-xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
+                {post.title}
+              </h2>
               <div className="flex items-center gap-4">
                 {post.author &&
                   post.author.firstName &&
@@ -89,17 +87,15 @@ export default async function PostPage(props: Props) {
                   )}
               </div>
             </div>
-            <article className="grid gap-6">
-              <div className="">
-                <CoverImage image={post.coverImage} priority />
-              </div>
+            <article className="space-y-6">
+              <CoverImage image={post.coverImage} priority />
               <section>
                 {post.modules && <Modules modules={post.modules} />}
               </section>
             </article>
           </div>
         </div>
-      </ContainerMD>
+      </div>
       <div className="border-t border-gray-100">
         <ContainerMD className="my-12 grid gap-12 lg:my-24">
           <aside>

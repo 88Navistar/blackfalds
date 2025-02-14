@@ -21,7 +21,7 @@ export default function TextWrapImage({
 }: TextWrapImageProps) {
   //console.log("image.asset too:", image.asset);
   return (
-    <div className="clearfix">
+    <div className="clearfix flex flex-col sm:block">
       <Image
         className={stegaClean(
           `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} m-4`
@@ -31,7 +31,7 @@ export default function TextWrapImage({
         width={image.assetData?.metadata?.dimensions?.width || 200}
         height={image.assetData?.metadata?.dimensions?.height || 200}
       />
-      <div className="text-balance">
+      <div className="px-2 text-balance sm:px-4">
         <CustomPortableText value={content} />
       </div>
     </div>

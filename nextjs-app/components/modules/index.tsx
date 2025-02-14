@@ -31,10 +31,10 @@ export default function Modules({ modules = [] }: { modules?: Module[] }) {
   }
 
   return (
-    <>
+    <div className="relative w-full overflow-hidden">
       {modules.map(module => (
         <ModuleContent key={module._key} module={module} />
       ))}
-    </>
+    </div>
   );
 }

@@ -31,7 +31,7 @@ export default function FullWidthImage({
         )}
       </div> */}
       {image && (
-        <div className="w-full">
+        <div className="">
           <Image
             src={urlForImage(image)?.url() || ""}
             alt={stegaClean(alt || caption || "Full width image")}
