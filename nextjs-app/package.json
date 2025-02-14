@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-app",
+  "name": "blackfalds-nextjs-app",
   "private": true,
   "scripts": {
     "predev": "npm run typegen",

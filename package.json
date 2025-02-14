@@ -1,6 +1,6 @@
 {
-  "name": "blackfalds",
-  "description": "Next.js + Sanity: A Powerful Website Starter with Real-time Visual Editing",
+  "name": "blackfalds-and-area-historical-society-workspace",
+  "description": "Blackfalds and Area Historical Society",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
     "dev:next": "npm run dev --workspace=nextjs-app",
