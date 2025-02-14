@@ -22,11 +22,11 @@ const CAROUSEL_SIZES = {
   three: "basis-full md:basis-1/2 lg:basis-1/3",
 } as const;
 
-const IMAGE_SIZES = {
-  one: "h-[30rem] sm:h-[40rem] lg:h-[31.25rem] xl:h-[35rem]",
-  two: "h-[30rem] md:h-[22rem] lg:h-[30rem] xl:h-[35rem]",
-  three: "h-[30rem] md:h-[20rem] xl:h-[25rem]",
-} as const;
+// const IMAGE_SIZES = {
+//   one: "h-[30rem] sm:h-[40rem] lg:h-[31.25rem] xl:h-[35rem]",
+//   two: "h-[30rem] md:h-[22rem] lg:h-[30rem] xl:h-[35rem]",
+//   three: "h-[30rem] md:h-[20rem] xl:h-[25rem]",
+// } as const;
 
 type CarouselSize = keyof typeof CAROUSEL_SIZES;
 type SanityImage = {
@@ -53,9 +53,10 @@ export default function CarouselOne({ block }: { block: Carousel1Props }) {
   const stegaIndicators = stegaClean(indicators);
 
   return (
-    <ContainerBlock className="bg-brawn-950">
-      <BlockHeadingDark title={title} description={description} />
-      {images && images.length > 0 && (
+    <div className="my-8 md:my-16">
+      <ContainerBlock className="bg-brawn-950">
+        <BlockHeadingDark title={title} description={description} />
+        {images && images.length > 0 && (
         <Carousel className="">
           <CarouselContent className="">
             {images.map((image, index) => {
@@ -115,5 +116,6 @@ export default function CarouselOne({ block }: { block: Carousel1Props }) {
         </Carousel>
       )}
     </ContainerBlock>
+    </div>
   );
 }

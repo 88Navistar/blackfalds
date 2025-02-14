@@ -68,6 +68,27 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type CarouselOne = {
+  _type: "carouselOne";
+  title?: string;
+  description?: string;
+  size?: "one" | "two" | "three";
+  indicators?: "none" | "dots" | "count";
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
 export type TextWrapImage = {
   _type: "textWrapImage";
   image?: {
@@ -188,7 +209,7 @@ export type CallToAction = {
 
 export type Link = {
   _type: "link";
-  linkType?: "href" | "page" | "post";
+  linkType?: "href" | "page" | "post" | "mail";
   href?: string;
   page?: {
     _ref: string;
@@ -306,6 +327,12 @@ export type Post = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  category?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "category";
+  };
   coverImage?: {
     asset?: {
       _ref: string;
@@ -328,6 +355,9 @@ export type Post = {
     | ({
         _key: string;
       } & TextWrapImage)
+    | ({
+        _key: string;
+      } & CarouselOne)
   >;
   excerpt?: string;
   date?: string;
@@ -365,6 +395,15 @@ export type Slug = {
   _type: "slug";
   current?: string;
   source?: string;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
 };
 
 export type Settings = {
@@ -605,6 +644,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | CarouselOne
   | TextWrapImage
   | ModuleBlock
   | FullWidthImage
@@ -616,6 +656,7 @@ export type AllSanitySchemaTypes =
   | Post
   | Person
   | Slug
+  | Category
   | Settings
   | SanityImageCrop
   | SanityImageHotspot
@@ -695,7 +736,7 @@ export type GetPageQueryResult = {
         buttonText?: string;
         link: {
           _type: "link";
-          linkType?: "href" | "page" | "post";
+          linkType?: "href" | "mail" | "page" | "post";
           href?: string;
           page: string | null;
           post: string | null;
@@ -832,7 +873,7 @@ export type MorePostsQueryResult = Array<{
   } | null;
 }>;
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  modules[]{      ...,      _type == "moduleBlock" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "fullWidthImage" => {        _type,        title,        description,        caption,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "textWrapImage" => {        _type,        content,        alignment,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      }      }
+// Query: *[_type == "post" && slug.current == $slug] [0] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage,  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  modules[]{      ...,      _type == "moduleBlock" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }          }        }      },      _type == "fullWidthImage" => {        _type,        caption,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "textWrapImage" => {        _type,        content,        alignment,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "carouselOne" => {        ...,        _type,        size,        indicators,        images[]{      asset->{        _id,        url,        mimeType,        metadata {          lqip,          dimensions {            width,            height          }        }      },      alt    },      },      }      }
 export type PostQueryResult = {
   _id: string;
   status: "draft" | "published";
@@ -871,9 +912,32 @@ export type PostQueryResult = {
   modules: Array<
     | {
         _key: string;
+        _type: "carouselOne";
+        title?: string;
+        description?: string;
+        size: "one" | "three" | "two" | null;
+        indicators: "count" | "dots" | "none" | null;
+        images: Array<{
+          asset: {
+            _id: string;
+            url: string | null;
+            mimeType: string | null;
+            metadata: {
+              lqip: string | null;
+              dimensions: {
+                width: number | null;
+                height: number | null;
+              } | null;
+            } | null;
+          } | null;
+          alt: string | null;
+        }> | null;
+      }
+    | {
+        _key: string;
         _type: "fullWidthImage";
-        title: string | null;
-        description: string | null;
+        title?: string;
+        description?: string;
         image: {
           asset: {
             _ref: string;
@@ -1018,7 +1082,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult;
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult;
-    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  modules[]{\n      ...,\n      _type == "moduleBlock" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "fullWidthImage" => {\n        _type,\n        title,\n        description,\n        caption,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "textWrapImage" => {\n        _type,\n        content,\n        alignment,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      }\n      }\n    \n  \n': PostQueryResult;
+    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage,\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  modules[]{\n      ...,\n      _type == "moduleBlock" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n          }\n        }\n      },\n      _type == "fullWidthImage" => {\n        _type,\n        caption,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "textWrapImage" => {\n        _type,\n        content,\n        alignment,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "carouselOne" => {\n        ...,\n        _type,\n        size,\n        indicators,\n        images[]{\n      asset->{\n        _id,\n        url,\n        mimeType,\n        metadata {\n          lqip,\n          dimensions {\n            width,\n            height\n          }\n        }\n      },\n      alt\n    },\n\n      },\n      }\n      }\n    \n  \n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult;
     '\n  *[_type == "page" && defined(slug.current)]\n  {"slug": slug.current}\n': PagesSlugsResult;
   }

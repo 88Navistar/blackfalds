@@ -1,4 +1,6 @@
 import {defineField, defineType} from 'sanity'
+import {IMAGE_ALIGN} from '../shared/imageVariants'
+import {IMAGE_WIDTH} from '../shared/imageVariants'
 
 export const textWrapImage = defineType({
   name: 'textWrapImage',
@@ -36,10 +38,7 @@ export const textWrapImage = defineType({
       title: 'Alignment',
       type: 'string',
       options: {
-        list: [
-          {title: 'Left', value: 'left'},
-          {title: 'Right', value: 'right'},
-        ],
+        list: IMAGE_ALIGN,
         layout: 'radio',
       },
       initialValue: 'left',
@@ -49,11 +48,7 @@ export const textWrapImage = defineType({
       title: 'Width',
       type: 'string',
       options: {
-        list: [
-          {title: 'Small', value: 'small'},
-          {title: 'Medium', value: 'medium'},
-          {title: 'Large', value: 'large'},
-        ],
+        list: IMAGE_WIDTH,
         layout: 'radio',
       },
       initialValue: 'medium',

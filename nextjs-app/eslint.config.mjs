@@ -46,6 +46,13 @@ export default [
         { argsIgnorePattern: '^_' },
       ],
       'no-console': 'off',
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "no-undef-init": "warn",
+      "no-unused-imports": "warn",
+      "no-unused-expressions": "warn",
+      "no-unused-labels": "warn",
+      "no-unused-catch": "warn",
     },
     settings: {
       react: {

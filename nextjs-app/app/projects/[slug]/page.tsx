@@ -1,13 +1,11 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
-import { type PortableTextBlock } from "next-sanity";
 import { Suspense } from "react";
 
 import Avatar from "@/components/Avatar";
 import { ContainerMD } from "@/components/ContainerMD";
 import CoverImage from "@/components/CoverImage";
 import Modules from "@/components/modules/index";
-import CustomPortableText from "@/components/PortableText";
 import { MorePosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { postPagesSlugs, postQuery } from "@/sanity/lib/queries";
