@@ -21,10 +21,10 @@ export default function TextWrapImage({
 }: TextWrapImageProps) {
   //console.log("image.asset too:", image.asset);
   return (
-    <div className="clearfix flex flex-col sm:block">
+    <div className="clearfix">
       <Image
         className={stegaClean(
-          `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} m-4`
+          `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} mx-4 mt-2 mb-4`
         )}
         src={urlForImage(image)?.url() || ""}
         alt={stegaClean(image.alt || "Historical Image")}
