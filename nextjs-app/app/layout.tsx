@@ -15,6 +15,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 import { handleError } from "./client-utils";
+import { TailwindIndicator } from "@/components/TailwindIndicator";
 
 /**
  * Generate metadata for the page.
@@ -85,6 +86,7 @@ export default async function RootLayout({
           <Header />
           <main className="mx-auto max-w-screen overflow-x-hidden">
             {children}
+            <TailwindIndicator />
           </main>
           <Footer />
         </section>
