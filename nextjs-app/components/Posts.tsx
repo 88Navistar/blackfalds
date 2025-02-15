@@ -15,34 +15,38 @@ const Post = ({ post }: { post: PostType }) => {
   return (
     <Card
       key={_id}
-      className="flex max-w-xl flex-col items-start justify-between border-stone-800 bg-stone-950/50"
+      className="flex max-w-xl flex-col bg-brawn-800/60 ring-2 shadow-lg ring-stone-900/20"
     >
-      {coverImage && (
-        <div className="w-full overflow-hidden rounded-t-lg">
+      {coverImage ? (
+        <div className="aspect-[16/9] w-full overflow-hidden rounded-t-lg">
           <PostsImage image={coverImage} />
         </div>
+      ) : (
+        <div className="aspect-[16/9] w-full rounded-t-lg bg-stone-800" />
       )}
 
-      <CardHeader className="space-y-2">
-        <div className="text-sm text-green-300/50">
-          <DateComponent dateString={date} />
-        </div>
+      <div className="flex flex-1 flex-col">
+        <CardHeader className="space-y-2">
+          <div className="text-sm text-green-300/50">
+            <DateComponent dateString={date} />
+          </div>
 
-        <h3 className="text-2xl font-semibold">
-          <Link
-            className="underline transition-colors hover:text-red-500"
-            href={`/projects/${slug}`}
-          >
-            {title}
-          </Link>
-        </h3>
-      </CardHeader>
+          <h3 className="text-2xl font-semibold">
+            <Link
+              className="underline transition-colors hover:text-red-500"
+              href={`/projects/${slug}`}
+            >
+              {title}
+            </Link>
+          </h3>
+        </CardHeader>
 
-      <CardContent>
-        <p className="line-clamp-3 text-sm leading-6 text-stone-200">
-          {excerpt}
-        </p>
-      </CardContent>
+        <CardContent>
+          <p className="line-clamp-3 text-sm leading-6 text-stone-200">
+            {excerpt}
+          </p>
+        </CardContent>
+      </div>
     </Card>
   );
 };
@@ -104,12 +108,14 @@ export const AllPosts = async () => {
 
   return (
     <Posts
-      heading="Recent Updates"
-      subHeading={`${data.length === 1 ? "This blog post is" : `Project Posts ${data.length} `} .`}
+      heading="Projects Page"
+      subHeading={`Total Projects ${data.length} `}
     >
-      {data.map((post: any) => (
-        <Post key={post._id} post={post} />
-      ))}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {data.map((post: any) => (
+          <Post key={post._id} post={post} />
+        ))}
+      </div>
     </Posts>
   );
 };
