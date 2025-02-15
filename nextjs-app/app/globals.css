@@ -23,6 +23,17 @@
   --color-brawn-800: oklch(34.47% 0.065 68.49);
   --color-brawn-900: oklch(22.69% 0.037 71.24);
   --color-brawn-950: oklch(15.45% 0.022 79.91);
+  --color-gold-50: oklch(95.45% 0.011 95.17);
+  --color-gold-100: oklch(90.1% 0.022 89.8);
+  --color-gold-200: oklch(79.97% 0.047 90.42);
+  --color-gold-300: oklch(73.78% 0.061 90.03);
+  --color-gold-400: oklch(68.32% 0.073 91.12);
+  --color-gold-500: oklch(60.37% 0.07 91);
+  --color-gold-600: oklch(51.06% 0.057 90);
+  --color-gold-700: oklch(41.64% 0.045 88.9);
+  --color-gold-800: oklch(32.67% 0.034 90.96);
+  --color-gold-900: oklch(21.91% 0.019 88.73);
+  --color-gold-950: oklch(15.35% 0.011 98.62);
   /* Fluid Text */
   --text-fluid-xs: clamp(0.64rem, 0.05vi + 0.63rem, 0.67rem);
   --text-fluid-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
@@ -56,8 +67,7 @@
   ---break---
 */
 :root {
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(20 14.3% 4.1%);
+  --background: oklch(90.1% 0.022 89.8);
   --card: hsl(0 0% 100%);
   --card-foreground: hsl(20 14.3% 4.1%);
   --popover: hsl(0 0% 100%);
@@ -86,7 +96,7 @@
   ---break---
 */
 .dark {
-  --background: oklch(22.69% 0.037 71.24);
+  --background: oklch(15.45% 0.022 79.91);
   --foreground: hsl(60 9.1% 97.8%);
   --card: hsl(20 14.3% 4.1%);
   --card-foreground: hsl(60 9.1% 97.8%);

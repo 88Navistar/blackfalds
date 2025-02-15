@@ -16,7 +16,7 @@ import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 import { handleError } from "./client-utils";
 import { TailwindIndicator } from "@/components/TailwindIndicator";
-
+import { Providers } from "./providers";
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
@@ -73,28 +73,31 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${crimson.variable} dark bg-brawn-900 text-stone-100`}
+      className={`${inter.variable} ${crimson.variable} text-stone-900 dark:text-stone-100`}
     >
       <body>
-        <section className="min-h-screen pt-24">
-          {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
-          <Toaster />
-          {isDraftMode && (
-            <>
-              <DraftModeToast />
-              {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
-              <VisualEditing />
-            </>
-          )}
-          {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
-          <SanityLive onError={handleError} />
-          <Header />
-          <main className="mx-auto max-w-screen overflow-x-hidden">
-            {children}
-            <TailwindIndicator />
-          </main>
-          <Footer />
-        </section>
+        <Providers>
+          <section className="min-h-screen pt-24">
+            {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
+            <Toaster />
+            {isDraftMode && (
+              <>
+                <DraftModeToast />
+                {/*  Enable Visual Editing, only to be rendered when Draft Mode is enabled */}
+                <VisualEditing />
+              </>
+            )}
+            {/* The <SanityLive> component is responsible for making all sanityFetch calls in your application live, so should always be rendered. */}
+            <SanityLive onError={handleError} />
+
+            <Header />
+            <main className="mx-auto max-w-screen overflow-x-hidden">
+              {children}
+              <TailwindIndicator />
+            </main>
+            <Footer />
+          </section>
+        </Providers>
       </body>
     </html>
   );

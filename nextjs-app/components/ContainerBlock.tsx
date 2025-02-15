@@ -17,7 +17,7 @@ export default function ContainerBlock({
         className // override with custom classes
       )}
     >
-      <ContainerTwo className="mx-auto max-w-7xl rounded-lg py-4 ring-4 ring-brawn-900">
+      <ContainerTwo className="mx-auto max-w-7xl rounded-lg py-4 ring-4 ring-stone-400 dark:ring-stone-500">
         {children}
       </ContainerTwo>
     </div>

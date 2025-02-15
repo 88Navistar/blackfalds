@@ -97,10 +97,10 @@ export function BlockHeadingDark({
 }) {
   return (
     <div className="mx-auto max-w-2xl pb-8">
-      <h2 className="text-fluid-xl font-semibold tracking-tight text-stone-200 text-center">
+      <h2 className="text-center text-fluid-xl font-semibold tracking-tight text-stone-800 dark:text-stone-200">
         {title}
       </h2>
-      <h3 className="mt-2 text-fluid-sm font-normal tracking-tight text-balance text-stone-300 text-left">
+      <h3 className="mt-2 text-left text-fluid-sm font-normal tracking-tight text-balance text-stone-700 dark:text-stone-300">
         {description}
       </h3>
     </div>

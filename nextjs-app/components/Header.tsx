@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import NavDesktop from "@/components/NavDesktop";
 import NavMobile from "@/components/NavMobile";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
   return (
@@ -29,6 +30,10 @@ export default function Header() {
               <NavMobile />
             </div>
           </nav>
+          <div className="hidden md:relative md:z-10 md:ml-4 md:flex md:items-center">
+            {/* Dark Mode Toggle */}
+            <ModeToggle />
+          </div>
         </div>
       </div>
     </header>
