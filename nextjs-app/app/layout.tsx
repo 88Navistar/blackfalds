@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Crimson_Pro, Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { toPlainText, VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
@@ -57,6 +57,11 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
+const crimson = Crimson_Pro({
+  variable: "--font-headings",
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export default async function RootLayout({
   children,
@@ -68,7 +73,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} dark bg-brawn-900 text-stone-100`}
+      className={`${inter.variable} ${crimson.variable} dark bg-brawn-900 text-stone-100`}
     >
       <body>
         <section className="min-h-screen pt-24">

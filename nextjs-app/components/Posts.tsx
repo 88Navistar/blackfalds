@@ -31,9 +31,9 @@ const Post = ({ post }: { post: PostType }) => {
             <DateComponent dateString={date} />
           </div>
 
-          <h3 className="text-2xl font-semibold">
+          <h3 className="font-headings text-3xl font-semibold">
             <Link
-              className="underline transition-colors hover:text-red-500"
+              className="transition-colors hover:text-red-500"
               href={`/projects/${slug}`}
             >
               {title}
@@ -63,7 +63,7 @@ const Posts = ({
 }) => (
   <div>
     {heading && (
-      <h2 className="text-3xl font-bold tracking-tight text-stone-200 sm:text-4xl lg:text-5xl">
+      <h2 className="font-headings text-3xl font-bold tracking-tight text-stone-200 sm:text-4xl lg:text-5xl">
         {heading}
       </h2>
     )}

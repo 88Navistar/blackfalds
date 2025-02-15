@@ -17,10 +17,10 @@ export default async function Page() {
             height={1000}
           />
           <div className="absolute inset-x-50 top-2 flex flex-col items-center justify-center text-center whitespace-nowrap lg:top-10">
-            <h2 className="texr-fluid-base xs:text-fluid-lg font-bold text-stone-900 drop-shadow-lg sm:text-fluid-2xl lg:text-fluid-3xl">
+            <h2 className="xs:text-fluid-lg font-headings text-fluid-base font-bold text-stone-900 drop-shadow-lg sm:text-fluid-2xl lg:text-fluid-3xl">
               Blackfalds & Area Historical Society
             </h2>
-            <h2 className="text-fluid-lg font-bold text-stone-700 drop-shadow-lg sm:text-fluid-xl lg:text-fluid-3xl">
+            <h2 className="font-headings text-fluid-lg font-bold text-stone-700 drop-shadow-lg sm:text-fluid-xl lg:text-fluid-3xl">
               Linking Past & Present
             </h2>
           </div>

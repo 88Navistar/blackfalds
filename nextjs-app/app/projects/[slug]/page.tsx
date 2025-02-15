@@ -75,8 +75,8 @@ export default async function PostPage(props: Props) {
       <div className="px-2">
         <div className="my-12 space-y-12 lg:my-24">
           <div className="space-y-6">
-            <div className="space-y-6 border-b border-gray-100 pb-6">
-              <h2 className="text-fluid-xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
+            <ContainerMD className="space-y-6 border-b border-gray-100 pb-6">
+              <h2 className="font-headings text-fluid-xl font-bold tracking-tight sm:text-5xl lg:text-7xl">
                 {post.title}
               </h2>
               <div className="flex items-center gap-4">
@@ -86,7 +86,7 @@ export default async function PostPage(props: Props) {
                     <Avatar person={post.author} date={post.date} />
                   )}
               </div>
-            </div>
+            </ContainerMD>
             <article className="space-y-6">
               <CoverImage image={post.coverImage} priority />
               <section>
