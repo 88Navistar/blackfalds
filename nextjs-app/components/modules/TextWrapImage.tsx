@@ -21,18 +21,20 @@ export default function TextWrapImage({
 }: TextWrapImageProps) {
   //console.log("image.asset too:", image.asset);
   return (
-    <div className="clearfix">
-      <Image
-        className={stegaClean(
-          `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} mx-4 mt-2 mb-4`
-        )}
-        src={urlForImage(image)?.url() || ""}
-        alt={stegaClean(image.alt || "Historical Image")}
-        width={image.assetData?.metadata?.dimensions?.width || 200}
-        height={image.assetData?.metadata?.dimensions?.height || 200}
-      />
-      <div className="px-2 text-balance sm:px-4">
-        <CustomPortableText value={content} />
+    <div className="mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-3xl">
+        <Image
+          className={stegaClean(
+            `float-${alignment} ${IMAGE_WIDTH_CLASSES[width]} mx-4 mt-2 mb-4`
+          )}
+          src={urlForImage(image)?.url() || ""}
+          alt={stegaClean(image.alt || "Historical Image")}
+          width={image.assetData?.metadata?.dimensions?.width || 200}
+          height={image.assetData?.metadata?.dimensions?.height || 200}
+        />
+        <div className="px-2 text-balance sm:px-4">
+          <CustomPortableText value={content} />
+        </div>
       </div>
     </div>
   );

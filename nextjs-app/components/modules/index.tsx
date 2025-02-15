@@ -15,7 +15,11 @@ export function ModuleContent({ module }: { module: Module }) {
     case "fullWidthImage":
       return <FullWidthImage {...module} key={module._key} />;
     case "moduleBlock":
-      return <CustomPortableText value={module.content} key={module._key} />;
+      return (
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center">
+          <CustomPortableText value={module.content} key={module._key} />
+        </div>
+      );
     case "textWrapImage":
       return <TextWrapImage {...module} key={module._key} />;
     case "carouselOne":
