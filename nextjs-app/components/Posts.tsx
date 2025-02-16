@@ -18,11 +18,13 @@ const Post = ({ post }: { post: PostType }) => {
       className="flex max-w-xl flex-col bg-stone-50 ring-2 shadow-lg ring-stone-900/20 dark:bg-brawn-800/40 dark:ring-stone-100/20"
     >
       {coverImage ? (
-        <div className="aspect-[16/9] w-full overflow-hidden rounded-t-lg">
-          <PostsImage image={coverImage} />
+        <div className="aspect-[16/9] w-full overflow-hidden rounded-t-lg bg-gold-100 dark:bg-gold-900">
+          <div className="flex h-full items-center justify-center">
+            <PostsImage image={coverImage} />
+          </div>
         </div>
       ) : (
-        <div className="aspect-[16/9] w-full rounded-t-lg bg-stone-800" />
+        <div className="aspect-[16/9] w-full rounded-t-lg bg-gold-100 dark:bg-gold-900" />
       )}
 
       <div className="flex flex-1 flex-col">

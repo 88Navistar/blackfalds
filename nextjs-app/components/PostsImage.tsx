@@ -12,7 +12,7 @@ export default function PostsImage(props: PostsImageProps) {
   const { image: source, priority } = props;
   const image = source?.asset?._ref ? (
     <Image
-      className="rounded-t-lg shadow-md transition-shadow hover:shadow-lg"
+      className="mx-auto rounded-lg shadow-md transition-shadow hover:shadow-lg"
       alt={stegaClean(source?.alt) || ""}
       src={urlForImage(source)?.url() as string}
       width={source?.assetData?.metadata?.dimensions?.width || 300}
@@ -24,9 +24,5 @@ export default function PostsImage(props: PostsImageProps) {
     <div className="bg-slate-50" style={{ paddingTop: "100%" }} />
   );
 
-  return (
-    <div className="relative mx-auto flex flex-col items-center justify-center">
-      {image}
-    </div>
-  );
+  return <div className="relative">{image}</div>;
 }

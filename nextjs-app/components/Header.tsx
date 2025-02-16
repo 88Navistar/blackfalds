@@ -4,12 +4,13 @@ import Link from "next/link";
 import NavDesktop from "@/components/NavDesktop";
 import NavMobile from "@/components/NavMobile";
 import { ModeToggle } from "./ModeToggle";
+import { ContainerMD } from "./ContainerMD";
 
 export default function Header() {
   return (
-    <header className="fixed inset-0 z-50 flex h-24 items-center backdrop-blur-lg">
-      <div className="container py-6 sm:px-6">
-        <div className="flex items-center justify-between gap-5">
+    <header className="fixed inset-0 z-50 flex h-28 items-center bg-background">
+      <ContainerMD className="">
+        <div className="flex items-center justify-between gap-4">
           <Link className="flex items-center gap-2" href="/">
             <Image
               src="/logos/BAHS-logo.png"
@@ -35,7 +36,7 @@ export default function Header() {
             <ModeToggle />
           </div>
         </div>
-      </div>
+      </ContainerMD>
     </header>
   );
 }
