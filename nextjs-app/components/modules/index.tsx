@@ -19,7 +19,7 @@ export function ModuleContent({ module }: { module: Module }) {
       return <FullWidthImage {...module} key={module._key} />;
     case "moduleBlock":
       return (
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-4 lg:px-0">
           <CustomPortableText value={module.content} key={module._key} />
         </div>
       );
