@@ -11,6 +11,7 @@ import {moduleBlock} from './modules/moduleBlock'
 import {textWrapImage} from './modules/textWrapImage'
 import {category} from './documents/category'
 import {carouselOne} from './modules/CarouselOne'
+import {acknowledgement} from './modules/acknowledgement'
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/schema-types
 
 export const schemaTypes = [
@@ -31,4 +32,5 @@ export const schemaTypes = [
   moduleBlock,
   textWrapImage,
   carouselOne,
+  acknowledgement,
 ]

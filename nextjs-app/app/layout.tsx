@@ -16,7 +16,7 @@ import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 import { handleError } from "./client-utils";
 import { TailwindIndicator } from "@/components/TailwindIndicator";
-import { Providers } from "./providers";
+import { ThemeProvider } from "./providers";
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
@@ -76,7 +76,12 @@ export default async function RootLayout({
       className={`${inter.variable} ${crimson.variable} text-stone-900 dark:text-stone-100`}
     >
       <body>
-        <Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <section className="min-h-screen pt-24">
             {/* The <Toaster> component is responsible for rendering toast notifications used in /app/client-utils.ts and /app/components/DraftModeToast.tsx */}
             <Toaster />
@@ -97,7 +102,7 @@ export default async function RootLayout({
             </main>
             <Footer />
           </section>
-        </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );
