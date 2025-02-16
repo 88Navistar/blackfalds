@@ -2,6 +2,7 @@ import CarouselOne from "@/components/modules/carousel-one";
 import FullWidthImage from "@/components/modules/FullWidthImage";
 import TextWrapImage from "@/components/modules/TextWrapImage";
 import CustomPortableText from "@/components/PortableText";
+import Acknowledgement from "./Acknowledgement";
 type Module<T = any> = {
   _type: string;
   _key: string;
@@ -12,6 +13,8 @@ export function ModuleContent({ module }: { module: Module }) {
     return null;
   }
   switch (module._type) {
+    case "acknowledgement":
+      return <Acknowledgement content={module.content} key={module._key} />;
     case "fullWidthImage":
       return <FullWidthImage {...module} key={module._key} />;
     case "moduleBlock":

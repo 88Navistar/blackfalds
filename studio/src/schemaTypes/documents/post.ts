@@ -75,6 +75,7 @@ export const post = defineType({
         {type: 'fullWidthImage'}, // Full width image
         {type: 'textWrapImage'}, // Text wrap image
         {type: 'carouselOne'}, // Carousel
+        {type: 'acknowledgement'}, // Acknowledgement
       ],
     }),
     defineField({
