@@ -73,7 +73,9 @@ export const getResourcePageQuery = defineQuery(`
           markDefs[]{
             ...,
             ${linkReference},
-            ${citationReference}
+            ${citationReference},
+          }
+        }
       },
       _type == "sourceGroup" => {
         ...,
@@ -120,7 +122,7 @@ export const postQuery = defineQuery(`
           markDefs[]{
             ...,
             ${linkReference},
-            ${citationReference}
+            ${citationReference},
           }
         }
       },
@@ -153,7 +155,7 @@ export const postQuery = defineQuery(`
           markDefs[]{
             ...,
             ${linkReference},
-            ${citationReference}
+            ${citationReference},
           }
         },
         alignment,
