@@ -12,7 +12,7 @@ export default function PostsImage(props: PostsImageProps) {
   const { image: source, priority } = props;
   const image = source?.asset?._ref ? (
     <Image
-      className="mx-auto rounded-lg shadow-md transition-shadow hover:shadow-lg"
+      className="mx-auto shadow-md transition-shadow hover:shadow-lg"
       alt={stegaClean(source?.alt) || ""}
       src={urlForImage(source)?.url() as string}
       width={source?.assetData?.metadata?.dimensions?.width || 300}

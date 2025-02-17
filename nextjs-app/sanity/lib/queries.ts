@@ -29,7 +29,17 @@ const postFields = /* groq */ `
   "date": coalesce(date, _updatedAt),
   "author": author->{firstName, lastName, picture},
 `;
-
+export const citationReference = /* groq */ `
+  _type == "citation" => {
+    ...,
+    citation-> {
+      ...,
+      _id,
+      citationNumber,
+      title
+    }
+  }
+`;
 const linkReference = /* groq */ `
   _type == "link" => {
     "page": page->slug.current,
@@ -43,9 +53,9 @@ const linkFields = /* groq */ `
       ${linkReference}
       }
 `;
-
-export const getPageQuery = defineQuery(`
-  *[_type == 'page' && slug.current == $slug][0]{
+//convert from page to resourcePage
+export const getResourcePageQuery = defineQuery(`
+  *[_type == 'resourcePage' && slug.current == $slug][0]{
     _id,
     _type,
     name,
@@ -62,7 +72,15 @@ export const getPageQuery = defineQuery(`
           ...,
           markDefs[]{
             ...,
-            ${linkReference}
+            ${linkReference},
+            ${citationReference}
+      },
+      _type == "sourceGroup" => {
+        ...,
+        sources[]->{
+          ...,
+          _type == "source" => {
+            ...,
           }
         }
       },
@@ -101,7 +119,8 @@ export const postQuery = defineQuery(`
           ...,
           markDefs[]{
             ...,
-            ${linkReference}
+            ${linkReference},
+            ${citationReference}
           }
         }
       },
@@ -129,7 +148,14 @@ export const postQuery = defineQuery(`
       },
       _type == "textWrapImage" => {
         _type,
-        content,
+        content[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference},
+            ${citationReference}
+          }
+        },
         alignment,
         image{
           asset{
@@ -182,8 +208,8 @@ export const postPagesSlugs = defineQuery(`
   *[_type == "post" && defined(slug.current)]
   {"slug": slug.current}
 `);
-
-export const pagesSlugs = defineQuery(`
-  *[_type == "page" && defined(slug.current)]
+//convert from page to resourcePage
+export const resourcePagesSlugs = defineQuery(`
+  *[_type == "resourcePage" && defined(slug.current)]
   {"slug": slug.current}
 `);

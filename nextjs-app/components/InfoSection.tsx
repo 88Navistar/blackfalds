@@ -8,7 +8,7 @@ type InfoProps = {
   index: number;
 };
 
-export default function CTA({ block }: InfoProps) {
+export default function Info({ block }: InfoProps) {
   return (
     <div className="container my-12">
       <div className="max-w-3xl">

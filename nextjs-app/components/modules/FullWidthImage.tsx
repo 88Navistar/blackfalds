@@ -19,7 +19,7 @@ export default function FullWidthImage({
   //console.log("image.asset:", image.asset);
 
   return (
-    <ContainerMD className="mx-auto flex flex-col items-center justify-center rounded-lg bg-gold-100 px-6 pt-6 pb-2 lg:px-12 lg:pt-12 lg:pb-8 dark:bg-gold-900">
+    <ContainerMD className="mx-auto my-2 flex flex-col items-center justify-center rounded-lg bg-gold-100 px-6 pt-6 pb-2 lg:px-12 lg:pt-12 lg:pb-8 dark:bg-gold-900">
       {/* <div className="prose max-w-[70ch] text-lg xl:text-xl dark:prose-invert">
         {title && (
           <h2 className="text-2xl font-bold text-slate-800 dark:text-slate-200">

@@ -22,6 +22,18 @@ export const blockContent = defineType({
       marks: {
         annotations: [
           {
+            title: 'Citation',
+            name: 'citation',
+            type: 'object',
+            fields: [
+              {
+                name: 'citation',
+                type: 'reference',
+                to: [{type: 'source'}],
+              },
+            ],
+          },
+          {
             name: 'link',
             type: 'object',
             title: 'Link',
@@ -55,15 +67,15 @@ export const blockContent = defineType({
                   }),
               }),
               defineField({
-                name: 'page',
-                title: 'Page',
+                name: 'resourcePage',
+                title: 'Resource Page',
                 type: 'reference',
-                to: [{type: 'page'}],
-                hidden: ({parent}) => parent?.linkType !== 'page',
+                to: [{type: 'resourcePage'}],
+                hidden: ({parent}) => parent?.linkType !== 'resourcePage',
                 validation: (Rule) =>
                   Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'page' && !value) {
-                      return 'Page reference is required when Link Type is Page'
+                    if (context.parent?.linkType === 'resourcePage' && !value) {
+                      return 'Resource Page reference is required when Link Type is ResourcePage'
                     }
                     return true
                   }),

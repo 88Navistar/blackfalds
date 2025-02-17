@@ -15,6 +15,7 @@ import {
 } from "next-sanity";
 
 import ResolvedLink from "@/components/ResolvedLink";
+import { Citation } from "./Citation";
 
 export default function CustomPortableText({
   className,
@@ -81,6 +82,9 @@ export default function CustomPortableText({
     marks: {
       link: ({ children, value: link }) => {
         return <ResolvedLink link={link}>{children}</ResolvedLink>;
+      },
+      citation: ({ children, value: citation }) => {
+        return <Citation value={citation}>{children}</Citation>;
       },
     },
   };

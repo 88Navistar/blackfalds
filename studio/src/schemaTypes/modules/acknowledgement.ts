@@ -11,4 +11,14 @@ export const acknowledgement = defineType({
       type: 'blockContent',
     }),
   ],
+  preview: {
+    select: {
+      title: 'Acknowledgement',
+    },
+    prepare() {
+      return {
+        title: 'Acknowledgement',
+      }
+    },
+  },
 })
