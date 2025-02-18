@@ -154,22 +154,6 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
-/*
-  ---break---
-*/
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-}
-/*
-  ---break---
-*/
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-}
 
 /* Add explicit float utilities */
 .float-left {
