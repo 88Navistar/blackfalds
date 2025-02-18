@@ -4,6 +4,8 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import PageBuilderPage from "@/components/PageBuilder";
 import { GetResourcePageQueryResult } from "@/sanity.types";
+import { ContainerMD } from "@/components/ContainerMD";
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -46,13 +48,15 @@ export default async function ResourcePage(props: Props) {
   const [{ data: resourcePage }] = await Promise.all([
     sanityFetch({ query: getResourcePageQuery, params }),
   ]);
+
   if (!resourcePage?._id) {
     return notFound();
   }
+
   return (
-    <div className="h-dvh">
+    <ContainerMD>
       <h1 className="pt-12 text-4xl font-bold">{resourcePage.name}</h1>
       <PageBuilderPage page={resourcePage as GetResourcePageQueryResult} />
-    </div>
+    </ContainerMD>
   );
 }

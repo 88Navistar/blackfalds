@@ -1,12 +1,16 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
-import NavDesktop from "@/components/NavDesktop";
+import { NavDesktop } from "@/components/NavDesktop";
 import NavMobile from "@/components/NavMobile";
 import { ModeToggle } from "./ModeToggle";
 import { ContainerMD } from "./ContainerMD";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   return (
     <header className="fixed inset-0 z-50 flex h-28 items-center bg-background">
       <ContainerMD className="">
@@ -25,7 +29,7 @@ export default function Header() {
 
           <nav>
             <div className="hidden md:block">
-              <NavDesktop />
+              <NavDesktop pathname={pathname} />
             </div>
             <div className="md:hidden">
               <NavMobile />

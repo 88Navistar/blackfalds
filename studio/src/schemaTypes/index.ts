@@ -16,6 +16,8 @@ import {resourcePage} from './documents/resourcePage'
 import {source} from './objects/source'
 import {sourceGroup} from './objects/sourceGroup'
 import {citationMark} from './objects/citationMark'
+import {indigenousTranslation} from './objects/indigenousTranslation'
+import {indigenousTranslationBlock} from './objects/indigenousTranslationBlock'
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/schema-types
 
 export const schemaTypes = [
@@ -30,6 +32,8 @@ export const schemaTypes = [
   // Objects
   blockContent,
   citationMark,
+  indigenousTranslation,
+  indigenousTranslationBlock,
   infoSection,
   callToAction,
   link,

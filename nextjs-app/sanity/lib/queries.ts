@@ -86,6 +86,25 @@ export const getResourcePageQuery = defineQuery(`
           }
         }
       },
+      _type == "indigenousTranslationBlock" => {
+        _type,
+        _key,
+        heading,
+        description,
+        translations[]-> {
+          _type,
+          languageGroup {
+            name,
+            nativeName,
+            meaning,
+            translator
+          },
+          translations[] {
+            english,
+            indigenous
+          }
+        }
+      },
     },
   }
 `);

@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { navItems } from "@/lib/site-data";
+import { ModeToggle } from "./ModeToggle";
 
 export default function NavMobile() {
   const [open, setOpen] = React.useState(false);
@@ -31,27 +32,62 @@ export default function NavMobile() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="flex w-[300px] flex-col p-2">
-        <div className="mt-10">
-          <Separator className="bg-pacific-7 my-4" decorative />
-          {/* Add your navigation links here */}
-          <nav className="flex flex-col space-y-4">
-            {navItems.map((item, index) => (
-              <Link
-                href={item.href}
-                key={index}
-                className={`rounded-md p-2 text-foreground/70 transition-colors hover:text-foreground ${
-                  pathname === item.href
-                    ? "bg-pacific-7 text-slate-50"
-                    : "hover:bg-pacific-7/10"
-                }`}
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <Separator className="my-4" decorative />
+        <div className="flex items-center justify-between py-4">
+          <div className="flex items-center gap-4">
+            <ModeToggle />
+            {/* Add other action buttons here */}
+            {/* <Button variant="ghost" size="icon">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <Info className="h-5 w-5" />
+            </Button> */}
+          </div>
         </div>
+
+        <Separator className="bg-pacific-7" decorative />
+
+        <nav className="mt-4 flex flex-col space-y-4">
+          {navItems.map(item => (
+            <div key={item.href}>
+              {item.children ? (
+                <div className="space-y-3">
+                  <span className="px-2 text-sm font-medium text-muted-foreground">
+                    {item.label}
+                  </span>
+                  <div className="flex flex-col space-y-2 pl-3">
+                    {item.children.map(child => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className={`rounded-md p-2 text-foreground/70 transition-colors hover:text-foreground ${
+                          pathname === child.href
+                            ? "bg-pacific-7 text-slate-50"
+                            : "hover:bg-pacific-7/10"
+                        }`}
+                        onClick={() => setOpen(false)}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={`rounded-md p-2 text-foreground/70 transition-colors hover:text-foreground ${
+                    pathname === item.href
+                      ? "bg-pacific-7 text-slate-50"
+                      : "hover:bg-pacific-7/10"
+                  }`}
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              )}
+            </div>
+          ))}
+        </nav>
       </SheetContent>
     </Sheet>
   );
