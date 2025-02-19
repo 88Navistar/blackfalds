@@ -18,8 +18,8 @@ import {citationMark} from './objects/citationMark'
 import {indigenousTranslation} from './objects/indigenousTranslation'
 import {indigenousTranslationBlock} from './objects/indigenousTranslationBlock'
 import {homePageSingleton} from './singletons/homePageSingleton'
-import {heroOne} from './modules/heroOne'
 import {historicalFact} from './objects/historicalFact'
+import {heroBlock} from './modules/heroBlock'
 // Export an array of all the schema types.  This is used in the Sanity Studio configuration. https://www.sanity.io/docs/schema-types
 
 export const schemaTypes = [
@@ -34,7 +34,7 @@ export const schemaTypes = [
   // Objects
   blockContent,
   citationMark,
-  heroOne,
+  heroBlock,
   historicalFact,
   indigenousTranslation,
   indigenousTranslationBlock,

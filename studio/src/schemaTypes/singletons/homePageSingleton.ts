@@ -8,8 +8,10 @@ export const homePageSingleton = defineType({
   fields: [
     defineField({
       name: 'hero',
-      title: 'Hero',
-      type: 'heroOne',
+      title: 'Hero Options',
+      description: 'First hero will be displayed on the home page',
+      type: 'array',
+      of: [{type: 'heroBlock'}],
     }),
     defineField({
       name: 'historicalFacts',

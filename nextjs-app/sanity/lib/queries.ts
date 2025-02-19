@@ -55,31 +55,54 @@ const linkFields = /* groq */ `
       ${linkReference}
       }
 `;
-export const homePageSingletonQuery = defineQuery(`
-  *[_type == "homePageSingleton"][0] {
-    hero {
-      title,
-      subTitle,
-      image{
-        ...,
-        "asset": asset{
+
+const imageWithMetadata = /* groq */ `
+  ...,
+  "asset": asset {
     _ref,
     _type,
-    _type == 'reference' => @->{
-     
+    _type == 'reference' => @-> {
       url,
-          mimeType,
-          metadata {
-              lqip,
-              dimensions {
-                width,
-                height,
-                aspectRatio
-              }
+      mimeType,
+      metadata {
+        lqip,
+        dimensions {
+          width,
+          height,
+          aspectRatio
+        }
       }
-    },
-    
+    }
   }
+`;
+
+export const homePageSingletonQuery = defineQuery(`
+  *[_type == "homePageSingleton"][0] {
+    "hero": hero[0] {
+      _type,
+      hero {
+        type,
+        fullWidth {
+          title,
+          tagline,
+          image {
+            ${imageWithMetadata}
+          }
+        },
+        halfWidth {
+          title,
+          tagline,
+          image {
+            ${imageWithMetadata}
+          }
+        },
+        video {
+          title,
+          tagline,
+          thumbnail {
+            ${imageWithMetadata}
+          }
+        }
       }
     },
     "historicalFacts": historicalFacts[]-> {
@@ -186,24 +209,7 @@ export const postQuery = defineQuery(`
         _type,
         caption,
         image{
-          ...,
-          asset{
-            _ref,
-            _type,
-            alt,
-            _type == 'reference' => @->{
-              url,
-              mimeType,
-              metadata {
-                lqip,
-                dimensions {  
-                  width,
-                  height,
-                  aspectRatio
-                }
-              }
-            },
-          },
+          ${imageWithMetadata}
         },
       },
       _type == "textWrapImage" => {
@@ -218,23 +224,7 @@ export const postQuery = defineQuery(`
         },
         alignment,
         image{
-          ...,
-          asset{
-            _ref,
-            _type,
-            _type == 'reference' => @->{
-              url,
-              mimeType,
-              metadata {
-                lqip,
-                dimensions {  
-                  width,
-                  height,
-                  aspectRatio
-                }
-              }
-            },
-          },
+          ${imageWithMetadata}
         },
       },
       _type == "carouselOne" => {
