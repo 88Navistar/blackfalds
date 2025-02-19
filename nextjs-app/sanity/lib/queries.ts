@@ -60,10 +60,12 @@ export const homePageSingletonQuery = defineQuery(`
       title,
       subTitle,
       image{
+        ...,
         "asset": asset{
     _ref,
     _type,
     _type == 'reference' => @->{
+     
       url,
           mimeType,
           metadata {

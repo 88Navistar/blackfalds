@@ -24,7 +24,7 @@ export default async function Page() {
         <div className="relative mx-auto px-4">
           <Image
             src={urlFor(homePageSingleton.hero?.image).url()}
-            alt="Blackfalds"
+            alt={homePageSingleton.hero?.image?.alt || "Blackfalds 1880"}
             className="mt-8w-full rounded-sm shadow-lg md:mt-16"
             width={
               homePageSingleton.hero?.image?.asset?.metadata?.dimensions?.width
