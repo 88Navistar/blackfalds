@@ -945,7 +945,7 @@ export type SettingsQueryResult = {
   };
 } | null;
 // Variable: homePageSingletonQuery
-// Query: *[_type == "homePageSingleton"][0] {    hero {      title,      subTitle,      image{        "asset": asset{    _ref,    _type,    _type == 'reference' => @->{      url,          mimeType,          metadata {              lqip,              dimensions {                width,                height,                aspectRatio              }      }    },      }      }    },    "historicalFacts": historicalFacts[]-> {      _id,      year,      title,      snippet    }  }
+// Query: *[_type == "homePageSingleton"][0] {    hero {      title,      subTitle,      image{        ...,        "asset": asset{    _ref,    _type,    _type == 'reference' => @->{           url,          mimeType,          metadata {              lqip,              dimensions {                width,                height,                aspectRatio              }      }    },      }      }    },    "historicalFacts": historicalFacts[]-> {      _id,      year,      title,      snippet    }  }
 export type HomePageSingletonQueryResult = {
   hero: {
     title: string | null;
@@ -965,6 +965,10 @@ export type HomePageSingletonQueryResult = {
           } | null;
         } | null;
       } | null;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
     } | null;
   } | null;
   historicalFacts: Array<{
@@ -1479,7 +1483,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult;
-    '\n  *[_type == "homePageSingleton"][0] {\n    hero {\n      title,\n      subTitle,\n      image{\n        "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n      }\n    },\n    "historicalFacts": historicalFacts[]-> {\n      _id,\n      year,\n      title,\n      snippet\n    }\n  }\n': HomePageSingletonQueryResult;
+    '\n  *[_type == "homePageSingleton"][0] {\n    hero {\n      title,\n      subTitle,\n      image{\n        ...,\n        "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n     \n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n      }\n    },\n    "historicalFacts": historicalFacts[]-> {\n      _id,\n      year,\n      title,\n      snippet\n    }\n  }\n': HomePageSingletonQueryResult;
     '\n  *[_type == \'resourcePage\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "sourceGroup" => {\n        ...,\n        sources[]->{\n          ...,\n          _type == "source" => {\n            ...,\n          }\n        }\n      },\n      _type == "indigenousTranslationBlock" => {\n        _type,\n        _key,\n        heading,\n        description,\n        translations[]-> {\n          _type,\n          languageGroup {\n            name,\n            nativeName,\n            meaning,\n            translator\n          },\n          translations[] {\n            english,\n            indigenous\n          }\n        }\n      },\n    },\n  }\n': GetResourcePageQueryResult;
     '\n  *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n    "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult;

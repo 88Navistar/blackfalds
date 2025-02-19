@@ -9,6 +9,7 @@ const postFields = /* groq */ `
   "slug": slug.current,
   excerpt,
   coverImage{
+    ...,
     "asset": asset{
     _ref,
     _type,
