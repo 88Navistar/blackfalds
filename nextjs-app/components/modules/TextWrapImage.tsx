@@ -19,7 +19,6 @@ export default function TextWrapImage({
   alignment,
   width,
 }: TextWrapImageProps) {
-  //console.log("image.asset too:", image.asset);
   return (
     <div className="mx-auto max-w-7xl">
       <div className="relative mx-auto max-w-3xl">
@@ -29,8 +28,8 @@ export default function TextWrapImage({
           )}
           src={urlForImage(image)?.url() || ""}
           alt={stegaClean(image.alt || "Historical Image")}
-          width={image.assetData?.metadata?.dimensions?.width || 200}
-          height={image.assetData?.metadata?.dimensions?.height || 200}
+          width={image.asset?.metadata?.dimensions?.width || 200}
+          height={image.asset?.metadata?.dimensions?.height || 200}
         />
         <div className="px-2 text-balance sm:px-4">
           <CustomPortableText value={content} />

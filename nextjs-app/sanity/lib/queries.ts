@@ -186,23 +186,25 @@ export const postQuery = defineQuery(`
         _type,
         caption,
         image{
+          ...,
           asset{
             _ref,
             _type,
-          },
-          "assetData": asset->{
-            url,
-            mimeType,
-            metadata {
-              lqip,
-              dimensions {
-                width,
-                height
+            alt,
+            _type == 'reference' => @->{
+              url,
+              mimeType,
+              metadata {
+                lqip,
+                dimensions {  
+                  width,
+                  height,
+                  aspectRatio
+                }
               }
-            }
+            },
           },
         },
-        "alt": image.alt,
       },
       _type == "textWrapImage" => {
         _type,
@@ -216,23 +218,24 @@ export const postQuery = defineQuery(`
         },
         alignment,
         image{
+          ...,
           asset{
             _ref,
             _type,
-          },
-          "assetData": asset->{
-            url,
-            mimeType,
-            metadata {
-              lqip,
-              dimensions {
-                width,
-                height
+            _type == 'reference' => @->{
+              url,
+              mimeType,
+              metadata {
+                lqip,
+                dimensions {  
+                  width,
+                  height,
+                  aspectRatio
+                }
               }
-            }
+            },
           },
         },
-        "alt": image.alt,
       },
       _type == "carouselOne" => {
         ...,
