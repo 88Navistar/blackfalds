@@ -16,7 +16,9 @@ export default function HistoricalTimeline({ historicalFacts }: TimelineProps) {
   return (
     <ContainerMD>
       <div className="relative max-w-prose space-y-4 py-8">
-        <h2 className="mb-8 text-3xl font-bold">Historical Notes</h2>
+        <h2 className="mb-8 font-headings text-fluid-2xl font-bold md:text-fluid-3xl">
+          Historical Notes
+        </h2>
         {sortedFacts.map(fact => (
           <HistoricalFact key={fact.year + fact.title} fact={fact} />
         ))}

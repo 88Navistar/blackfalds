@@ -15,8 +15,8 @@ export default function PostsImage(props: PostsImageProps) {
       className="mx-auto shadow-md transition-shadow hover:shadow-lg"
       alt={stegaClean(source?.alt) || ""}
       src={urlForImage(source)?.url() as string}
-      width={source?.assetData?.metadata?.dimensions?.width || 300}
-      height={source?.assetData?.metadata?.dimensions?.height || 200}
+      width={source?.asset?.metadata?.dimensions?.width || 300}
+      height={source?.asset?.metadata?.dimensions?.height || 200}
       sizes="(max-width: 768px) 100vw, 300px"
       priority={priority}
     />

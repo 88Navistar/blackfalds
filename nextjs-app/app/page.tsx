@@ -20,16 +20,20 @@ export default async function Page() {
   console.log(homePageSingleton.historicalFacts[0].year);
   return (
     <>
-      <div className="border-gray-10 min-h-dvh border-t">
+      <div className="min-h-dvh">
         <div className="relative mx-auto px-4">
           <Image
             src={urlFor(homePageSingleton.hero?.image).url()}
             alt="Blackfalds"
-            className="mt-16 w-full rounded-sm shadow-lg"
-            width={1600}
-            height={1000}
+            className="mt-8w-full rounded-sm shadow-lg md:mt-16"
+            width={
+              homePageSingleton.hero?.image?.asset?.metadata?.dimensions?.width
+            }
+            height={
+              homePageSingleton.hero?.image?.asset?.metadata?.dimensions?.height
+            }
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
           <div className="absolute inset-x-50 top-2 flex flex-col items-center justify-center text-center whitespace-nowrap lg:top-10">
             <h2 className="xs:text-fluid-lg font-headings text-fluid-base font-bold text-stone-900 drop-shadow-lg sm:text-fluid-2xl lg:text-fluid-3xl">

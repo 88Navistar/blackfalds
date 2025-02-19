@@ -9,14 +9,13 @@ const postFields = /* groq */ `
   "slug": slug.current,
   excerpt,
   coverImage{
-          asset{
-            _ref,
-            _type,
-          },
-          "assetData": asset->{
-            url,
-            mimeType,
-            metadata {
+    "asset": asset{
+    _ref,
+    _type,
+    _type == 'reference' => @->{
+      url,
+          mimeType,
+          metadata {
               lqip,
               dimensions {
                 width,
@@ -25,6 +24,8 @@ const postFields = /* groq */ `
               }
       }
     },
+    
+  }
   },
   "date": coalesce(date, _updatedAt),
   "author": author->{firstName, lastName, picture},
@@ -56,7 +57,27 @@ const linkFields = /* groq */ `
 export const homePageSingletonQuery = defineQuery(`
   *[_type == "homePageSingleton"][0] {
     hero {
-      ...
+      title,
+      subTitle,
+      image{
+        "asset": asset{
+    _ref,
+    _type,
+    _type == 'reference' => @->{
+      url,
+          mimeType,
+          metadata {
+              lqip,
+              dimensions {
+                width,
+                height,
+                aspectRatio
+              }
+      }
+    },
+    
+  }
+      }
     },
     "historicalFacts": historicalFacts[]-> {
       _id,
