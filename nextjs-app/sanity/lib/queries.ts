@@ -42,7 +42,7 @@ export const citationReference = /* groq */ `
 `;
 const linkReference = /* groq */ `
   _type == "link" => {
-    "page": page->slug.current,
+    "resourcePage": resourcePage->slug.current,
     "post": post->slug.current
   }
 `;
@@ -53,6 +53,19 @@ const linkFields = /* groq */ `
       ${linkReference}
       }
 `;
+export const homePageSingletonQuery = defineQuery(`
+  *[_type == "homePageSingleton"][0] {
+    hero {
+      ...
+    },
+    "historicalFacts": historicalFacts[]-> {
+      _id,
+      year,
+      title,
+      snippet
+    }
+  }
+`);
 //convert from page to resourcePage
 export const getResourcePageQuery = defineQuery(`
   *[_type == 'resourcePage' && slug.current == $slug][0]{
@@ -110,7 +123,7 @@ export const getResourcePageQuery = defineQuery(`
 `);
 
 export const sitemapData = defineQuery(`
-  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {
+  *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {
     "slug": slug.current,
     _type,
     _updatedAt,

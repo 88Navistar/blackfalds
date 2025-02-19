@@ -18,7 +18,7 @@ import {
 import {assist} from '@sanity/assist'
 
 // Environment variables for project configuration
-const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
+const projectId = process.env.SANITY_STUDIO_PROJECT_ID || '8alr61oi'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
 // URL for preview functionality, defaults to localhost:3000 if not set
@@ -36,7 +36,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
   switch (documentType) {
     case 'post':
       return slug ? `/projects/${slug}` : undefined
-    case 'page':
+    case 'resourcePage':
       return slug ? `/${slug}` : undefined
     default:
       console.warn('Invalid document type:', documentType)
@@ -47,7 +47,7 @@ function resolveHref(documentType?: string, slug?: string): string | undefined {
 // Main Sanity configuration
 export default defineConfig({
   name: 'default',
-  title: 'Clean Next.js + Sanity',
+  title: 'Blackfalds Historical Society',
 
   projectId,
   dataset,
@@ -66,7 +66,7 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           {
             route: '/:slug',
-            filter: `_type == "page" && slug.current == $slug || _id == $slug`,
+            filter: `_type == "resourcePage" && slug.current == $slug || _id == $slug`,
           },
           {
             route: '/projects/:slug',

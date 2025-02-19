@@ -294,13 +294,13 @@ export type CallToAction = {
 
 export type Link = {
   _type: "link";
-  linkType?: "href" | "page" | "post" | "mail";
+  linkType?: "href" | "resourcePage" | "post" | "mail";
   href?: string;
-  page?: {
+  resourcePage?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
+    [internalGroqTypeReferenceTo]?: "resourcePage";
   };
   post?: {
     _ref: string;
@@ -394,6 +394,17 @@ export type IndigenousTranslation = {
   }>;
 };
 
+export type HistoricalFact = {
+  _id: string;
+  _type: "historicalFact";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  year?: number;
+  title?: string;
+  snippet?: string;
+};
+
 export type CitationMark = {
   _type: "citationMark";
   citation?: {
@@ -449,52 +460,6 @@ export type BlockContent = Array<{
   _type: "block";
   _key: string;
 }>;
-
-export type Page = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  heading?: string;
-  subheading?: string;
-  pageBuilder?: Array<
-    | ({
-        _key: string;
-      } & CallToAction)
-    | ({
-        _key: string;
-      } & InfoSection)
-  >;
-};
-
-export type ResourcePage = {
-  _id: string;
-  _type: "resourcePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  heading?: string;
-  subheading?: string;
-  pageBuilder?: Array<
-    | ({
-        _key: string;
-      } & CallToAction)
-    | ({
-        _key: string;
-      } & InfoSection)
-    | ({
-        _key: string;
-      } & SourceGroup)
-    | ({
-        _key: string;
-      } & IndigenousTranslationBlock)
-  >;
-};
 
 export type Post = {
   _id: string;
@@ -571,6 +536,32 @@ export type Person = {
   };
 };
 
+export type ResourcePage = {
+  _id: string;
+  _type: "resourcePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  heading?: string;
+  subheading?: string;
+  pageBuilder?: Array<
+    | ({
+        _key: string;
+      } & CallToAction)
+    | ({
+        _key: string;
+      } & InfoSection)
+    | ({
+        _key: string;
+      } & SourceGroup)
+    | ({
+        _key: string;
+      } & IndigenousTranslationBlock)
+  >;
+};
+
 export type Source = {
   _id: string;
   _type: "source";
@@ -596,6 +587,40 @@ export type Category = {
   _updatedAt: string;
   _rev: string;
   name?: string;
+};
+
+export type HomePageSingleton = {
+  _id: string;
+  _type: "homePageSingleton";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: HeroOne;
+  historicalFacts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "historicalFact";
+  }>;
+};
+
+export type HeroOne = {
+  _type: "heroOne";
+  title?: string;
+  subTitle?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 };
 
 export type Settings = {
@@ -847,15 +872,17 @@ export type AllSanitySchemaTypes =
   | InfoSection
   | IndigenousTranslationBlock
   | IndigenousTranslation
+  | HistoricalFact
   | CitationMark
   | BlockContent
-  | Page
-  | ResourcePage
   | Post
   | Person
+  | ResourcePage
   | Source
   | Slug
   | Category
+  | HomePageSingleton
+  | HeroOne
   | Settings
   | SanityImageCrop
   | SanityImageHotspot
@@ -918,7 +945,7 @@ export type SettingsQueryResult = {
   };
 } | null;
 // Variable: getResourcePageQuery
-// Query: *[_type == 'resourcePage' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        }      },      _type == "sourceGroup" => {        ...,        sources[]->{          ...,          _type == "source" => {            ...,          }        }      },      _type == "indigenousTranslationBlock" => {        _type,        _key,        heading,        description,        translations[]-> {          _type,          languageGroup {            name,            nativeName,            meaning,            translator          },          translations[] {            english,            indigenous          }        }      },    },  }
+// Query: *[_type == 'resourcePage' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    heading,    subheading,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  }      },      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        }      },      _type == "sourceGroup" => {        ...,        sources[]->{          ...,          _type == "source" => {            ...,          }        }      },      _type == "indigenousTranslationBlock" => {        _type,        _key,        heading,        description,        translations[]-> {          _type,          languageGroup {            name,            nativeName,            meaning,            translator          },          translations[] {            english,            indigenous          }        }      },    },  }
 export type GetResourcePageQueryResult = {
   _id: string;
   _type: "resourcePage";
@@ -935,9 +962,9 @@ export type GetResourcePageQueryResult = {
         buttonText?: string;
         link: {
           _type: "link";
-          linkType?: "href" | "mail" | "page" | "post";
+          linkType?: "href" | "mail" | "post" | "resourcePage";
           href?: string;
-          page: string | null;
+          resourcePage: string | null;
           post: string | null;
           openInNewTab?: boolean;
         } | null;
@@ -1002,18 +1029,12 @@ export type GetResourcePageQueryResult = {
             | {
                 linkType?: "href" | "mail" | "page" | "post";
                 href?: string;
-                resourcePage?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "resourcePage";
-                };
+                resourcePage: string | null;
                 post: string | null;
                 mail?: string;
                 openInNewTab?: boolean;
                 _type: "link";
                 _key: string;
-                page: null;
               }
           > | null;
           level?: number;
@@ -1040,16 +1061,16 @@ export type GetResourcePageQueryResult = {
   > | null;
 } | null;
 // Variable: sitemapData
-// Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
+// Query: *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<
   | {
       slug: string | null;
-      _type: "page";
+      _type: "post";
       _updatedAt: string;
     }
   | {
       slug: string | null;
-      _type: "post";
+      _type: "resourcePage";
       _updatedAt: string;
     }
 >;
@@ -1142,7 +1163,7 @@ export type MorePostsQueryResult = Array<{
   } | null;
 }>;
 // Variable: postQuery
-// Query: *[_type == "post" && slug.current == $slug] [0] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height,                aspectRatio              }      }    },  },  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  modules[]{      ...,      _type == "moduleBlock" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        }      },      _type == "fullWidthImage" => {        _type,        caption,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "textWrapImage" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        },        alignment,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "carouselOne" => {        ...,        _type,        size,        indicators,        images[]{      asset->{        _id,        url,        mimeType,        metadata {          lqip,          dimensions {            width,            height          }        }      },      alt    },      },      }      }
+// Query: *[_type == "post" && slug.current == $slug] [0] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  coverImage{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height,                aspectRatio              }      }    },  },  "date": coalesce(date, _updatedAt),  "author": author->{firstName, lastName, picture},  modules[]{      ...,      _type == "moduleBlock" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        }      },      _type == "fullWidthImage" => {        _type,        caption,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "textWrapImage" => {        _type,        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        },        alignment,        image{          asset{            _ref,            _type,          },          "assetData": asset->{            url,            mimeType,            metadata {              lqip,              dimensions {                width,                height              }            }          },        },        "alt": image.alt,      },      _type == "carouselOne" => {        ...,        _type,        size,        indicators,        images[]{      asset->{        _id,        url,        mimeType,        metadata {          lqip,          dimensions {            width,            height          }        }      },      alt    },      },      }      }
 export type PostQueryResult = {
   _id: string;
   status: "draft" | "published";
@@ -1331,18 +1352,12 @@ export type PostQueryResult = {
             | {
                 linkType?: "href" | "mail" | "page" | "post";
                 href?: string;
-                resourcePage?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "resourcePage";
-                };
+                resourcePage: string | null;
                 post: string | null;
                 mail?: string;
                 openInNewTab?: boolean;
                 _type: "link";
                 _key: string;
-                page: null;
               }
           > | null;
           level?: number;
@@ -1406,18 +1421,12 @@ export type PostQueryResult = {
             | {
                 linkType?: "href" | "mail" | "page" | "post";
                 href?: string;
-                resourcePage?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "resourcePage";
-                };
+                resourcePage: string | null;
                 post: string | null;
                 mail?: string;
                 openInNewTab?: boolean;
                 _type: "link";
                 _key: string;
-                page: null;
               }
           > | null;
           level?: number;
@@ -1446,11 +1455,11 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult;
-    '\n  *[_type == \'resourcePage\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "sourceGroup" => {\n        ...,\n        sources[]->{\n          ...,\n          _type == "source" => {\n            ...,\n          }\n        }\n      },\n      _type == "indigenousTranslationBlock" => {\n        _type,\n        _key,\n        heading,\n        description,\n        translations[]-> {\n          _type,\n          languageGroup {\n            name,\n            nativeName,\n            meaning,\n            translator\n          },\n          translations[] {\n            english,\n            indigenous\n          }\n        }\n      },\n    },\n  }\n': GetResourcePageQueryResult;
-    '\n  *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
+    '\n  *[_type == \'resourcePage\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "sourceGroup" => {\n        ...,\n        sources[]->{\n          ...,\n          _type == "source" => {\n            ...,\n          }\n        }\n      },\n      _type == "indigenousTranslationBlock" => {\n        _type,\n        _key,\n        heading,\n        description,\n        translations[]-> {\n          _type,\n          languageGroup {\n            name,\n            nativeName,\n            meaning,\n            translator\n          },\n          translations[] {\n            english,\n            indigenous\n          }\n        }\n      },\n    },\n  }\n': GetResourcePageQueryResult;
+    '\n  *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult;
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': MorePostsQueryResult;
-    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  modules[]{\n      ...,\n      _type == "moduleBlock" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "fullWidthImage" => {\n        _type,\n        caption,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "textWrapImage" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "page": page->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        },\n        alignment,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "carouselOne" => {\n        ...,\n        _type,\n        size,\n        indicators,\n        images[]{\n      asset->{\n        _id,\n        url,\n        mimeType,\n        metadata {\n          lqip,\n          dimensions {\n            width,\n            height\n          }\n        }\n      },\n      alt\n    },\n\n      },\n      }\n      }\n    \n  \n': PostQueryResult;
+    '\n  *[_type == "post" && slug.current == $slug] [0] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  modules[]{\n      ...,\n      _type == "moduleBlock" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "fullWidthImage" => {\n        _type,\n        caption,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "textWrapImage" => {\n        _type,\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        },\n        alignment,\n        image{\n          asset{\n            _ref,\n            _type,\n          },\n          "assetData": asset->{\n            url,\n            mimeType,\n            metadata {\n              lqip,\n              dimensions {\n                width,\n                height\n              }\n            }\n          },\n        },\n        "alt": image.alt,\n      },\n      _type == "carouselOne" => {\n        ...,\n        _type,\n        size,\n        indicators,\n        images[]{\n      asset->{\n        _id,\n        url,\n        mimeType,\n        metadata {\n          lqip,\n          dimensions {\n            width,\n            height\n          }\n        }\n      },\n      alt\n    },\n\n      },\n      }\n      }\n    \n  \n': PostQueryResult;
     '\n  *[_type == "post" && defined(slug.current)]\n  {"slug": slug.current}\n': PostPagesSlugsResult;
     '\n  *[_type == "resourcePage" && defined(slug.current)]\n  {"slug": slug.current}\n': ResourcePagesSlugsResult;
   }

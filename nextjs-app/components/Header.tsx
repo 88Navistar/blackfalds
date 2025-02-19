@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className="fixed inset-0 z-50 flex h-28 items-center bg-background">
+    <header className="fixed inset-0 z-50 flex h-16 items-center bg-background md:h-28">
       <ContainerMD className="">
         <div className="flex items-center justify-between gap-4">
           <Link className="flex items-center gap-2" href="/">
@@ -21,10 +21,8 @@ export default function Header() {
               alt="Blackfalds"
               width={100}
               height={100}
+              className="h-16 w-16 py-2 md:h-28 md:w-28"
             />
-            <span className="hidden pl-2 text-lg font-semibold lg:block">
-              Blackfalds
-            </span>
           </Link>
 
           <nav>

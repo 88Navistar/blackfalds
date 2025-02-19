@@ -21,7 +21,7 @@ export const link = defineType({
       options: {
         list: [
           {title: 'URL', value: 'href'},
-          {title: 'Page', value: 'page'},
+          {title: 'Resource Page', value: 'resourcePage'},
           {title: 'Post', value: 'post'},
           {title: 'Email', value: 'mail'},
         ],
@@ -43,16 +43,16 @@ export const link = defineType({
         }),
     }),
     defineField({
-      name: 'page',
-      title: 'Page',
+      name: 'resourcePage',
+      title: 'Resource Page',
       type: 'reference',
-      to: [{type: 'page'}],
-      hidden: ({parent}) => parent?.linkType !== 'page',
+      to: [{type: 'resourcePage'}],
+      hidden: ({parent}) => parent?.linkType !== 'resourcePage',
       validation: (Rule) =>
         // Custom validation to ensure page reference is provided if the link type is 'page'
         Rule.custom((value, context: any) => {
-          if (context.parent?.linkType === 'page' && !value) {
-            return 'Page reference is required when Link Type is Page'
+          if (context.parent?.linkType === 'resourcePage' && !value) {
+            return 'Resource Page reference is required when Link Type is Resource Page'
           }
           return true
         }),
