@@ -55,7 +55,7 @@ const linkFields = /* groq */ `
       ${linkReference}
       }
 `;
-
+// For use with urlForImage when the _ref is needed for validation,
 const imageWithMetadata = /* groq */ `
   ...,
   "asset": asset {
@@ -104,6 +104,27 @@ export const homePageSingletonQuery = defineQuery(`
           }
         }
       }
+    },
+    "carouselOne": carouselOne {
+      ...,
+        _type,
+        size,
+        indicators,
+        images[]{
+      asset->{
+        _id,
+        url,
+        mimeType,
+        metadata {
+          lqip,
+          dimensions {
+            width,
+            height
+          }
+        }
+      },
+      alt
+    },
     },
     "historicalFacts": historicalFacts[]-> {
       _id,

@@ -14,6 +14,11 @@ export const homePageSingleton = defineType({
       of: [{type: 'heroBlock'}],
     }),
     defineField({
+      name: 'carouselOne',
+      title: 'Carousel One',
+      type: 'carouselOne',
+    }),
+    defineField({
       name: 'historicalFacts',
       title: 'Historical Facts',
       type: 'array',
