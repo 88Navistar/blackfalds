@@ -117,27 +117,6 @@ export type Acknowledgement = {
   }>;
 };
 
-export type CarouselOne = {
-  _type: "carouselOne";
-  title?: string;
-  description?: string;
-  size?: "one" | "two" | "three";
-  indicators?: "none" | "dots" | "count";
-  images?: Array<{
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
-};
-
 export type TextWrapImage = {
   _type: "textWrapImage";
   image?: {
@@ -504,6 +483,148 @@ export type BlockContent = Array<{
   _key: string;
 }>;
 
+export type HomePageSingleton = {
+  _id: string;
+  _type: "homePageSingleton";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  hero?: Array<
+    {
+      _key: string;
+    } & HeroBlock
+  >;
+  carouselOne?: CarouselOne;
+  historicalFacts?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "historicalFact";
+  }>;
+};
+
+export type CarouselOne = {
+  _type: "carouselOne";
+  title?: string;
+  description?: string;
+  size?: "one" | "two" | "three";
+  indicators?: "none" | "dots" | "count";
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }>;
+};
+
+export type Settings = {
+  _id: string;
+  _type: "settings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal";
+    listItem?: never;
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  ogImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    metadataBase?: string;
+    _type: "image";
+  };
+};
+
+export type ContactPage = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  content?: BlockContent;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+};
+
+export type AboutPage = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  description?: string;
+  content?: BlockContent;
+};
+
+export type ResourcePage = {
+  _id: string;
+  _type: "resourcePage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  heading?: string;
+  subheading?: string;
+  pageBuilder?: Array<
+    | ({
+        _key: string;
+      } & CallToAction)
+    | ({
+        _key: string;
+      } & InfoSection)
+    | ({
+        _key: string;
+      } & SourceGroup)
+    | ({
+        _key: string;
+      } & IndigenousTranslationBlock)
+  >;
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -579,119 +700,6 @@ export type Person = {
   };
 };
 
-export type ResourcePage = {
-  _id: string;
-  _type: "resourcePage";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  heading?: string;
-  subheading?: string;
-  pageBuilder?: Array<
-    | ({
-        _key: string;
-      } & CallToAction)
-    | ({
-        _key: string;
-      } & InfoSection)
-    | ({
-        _key: string;
-      } & SourceGroup)
-    | ({
-        _key: string;
-      } & IndigenousTranslationBlock)
-  >;
-};
-
-export type Source = {
-  _id: string;
-  _type: "source";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  citationNumber?: number;
-  author?: string;
-  title?: string;
-  publicationDetails?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-};
-
-export type HomePageSingleton = {
-  _id: string;
-  _type: "homePageSingleton";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  hero?: Array<
-    {
-      _key: string;
-    } & HeroBlock
-  >;
-  historicalFacts?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "historicalFact";
-  }>;
-};
-
-export type Settings = {
-  _id: string;
-  _type: "settings";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  description?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-  ogImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    metadataBase?: string;
-    _type: "image";
-  };
-};
-
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -747,6 +755,33 @@ export type SanityImageMetadata = {
   blurHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type Source = {
+  _id: string;
+  _type: "source";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  citationNumber?: number;
+  author?: string;
+  title?: string;
+  publicationDetails?: string;
 };
 
 export type SanityAssistInstructionTask = {
@@ -891,7 +926,6 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | Geopoint
   | Acknowledgement
-  | CarouselOne
   | TextWrapImage
   | ModuleBlock
   | FullWidthImage
@@ -905,19 +939,22 @@ export type AllSanitySchemaTypes =
   | HeroBlock
   | CitationMark
   | BlockContent
+  | HomePageSingleton
+  | CarouselOne
+  | Settings
+  | ContactPage
+  | AboutPage
+  | ResourcePage
   | Post
   | Person
-  | ResourcePage
-  | Source
-  | Slug
-  | Category
-  | HomePageSingleton
-  | Settings
   | SanityImageCrop
   | SanityImageHotspot
   | SanityImageAsset
   | SanityAssetSourceData
   | SanityImageMetadata
+  | Category
+  | Slug
+  | Source
   | SanityAssistInstructionTask
   | SanityAssistTaskStatus
   | SanityAssistSchemaTypeAnnotations
@@ -973,8 +1010,130 @@ export type SettingsQueryResult = {
     _type: "image";
   };
 } | null;
+// Variable: aboutPageQuery
+// Query: *[_type == "aboutPage"][0] {    ...,    title,    description,    "content": content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  },              _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },          }        }  }
+export type AboutPageQueryResult = {
+  _id: string;
+  _type: "aboutPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string | null;
+  description: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs: Array<
+      | {
+          citation: {
+            _id: string;
+            _type: "source";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            citationNumber: number | null;
+            author?: string;
+            title: string | null;
+            publicationDetails?: string;
+          } | null;
+          _type: "citation";
+          _key: string;
+        }
+      | {
+          linkType?: "href" | "mail" | "page" | "post";
+          href?: string;
+          resourcePage: string | null;
+          post: string | null;
+          mail?: string;
+          openInNewTab?: boolean;
+          _type: "link";
+          _key: string;
+        }
+    > | null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+} | null;
+// Variable: contactPageQuery
+// Query: *[_type == "contactPage"][0] {    ...,    title,    description,    "content": content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "resourcePage": resourcePage->slug.current,    "post": post->slug.current  },          _type == "citation" => {    ...,    citation-> {      ...,      _id,      citationNumber,      title    }  },      }    },    image {        ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }    }  }
+export type ContactPageQueryResult = {
+  _id: string;
+  _type: "contactPage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string | null;
+  description: string | null;
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs: Array<
+      | {
+          citation: {
+            _id: string;
+            _type: "source";
+            _createdAt: string;
+            _updatedAt: string;
+            _rev: string;
+            citationNumber: number | null;
+            author?: string;
+            title: string | null;
+            publicationDetails?: string;
+          } | null;
+          _type: "citation";
+          _key: string;
+        }
+      | {
+          linkType?: "href" | "mail" | "page" | "post";
+          href?: string;
+          resourcePage: string | null;
+          post: string | null;
+          mail?: string;
+          openInNewTab?: boolean;
+          _type: "link";
+          _key: string;
+        }
+    > | null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  image: {
+    asset: {
+      _ref: string;
+      _type: "reference";
+      url: string | null;
+      mimeType: string | null;
+      metadata: {
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+          aspectRatio: number | null;
+        } | null;
+      } | null;
+    } | null;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+} | null;
 // Variable: homePageSingletonQuery
-// Query: *[_type == "homePageSingleton"][0] {    "hero": hero[0] {      _type,      hero {        type,        fullWidth {          title,          tagline,          image {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        },        halfWidth {          title,          tagline,          image {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        },        video {          title,          tagline,          thumbnail {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        }      }    },    "historicalFacts": historicalFacts[]-> {      _id,      year,      title,      snippet    }  }
+// Query: *[_type == "homePageSingleton"][0] {    "hero": hero[0] {      _type,      hero {        type,        fullWidth {          title,          tagline,          image {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        },        halfWidth {          title,          tagline,          image {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        },        video {          title,          tagline,          thumbnail {              ...,  "asset": asset {    _ref,    _type,    _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }  }          }        }      }    },    "carouselOne": carouselOne {      ...,        _type,        size,        indicators,        images[]{      asset->{        _id,        url,        mimeType,        metadata {          lqip,          dimensions {            width,            height          }        }      },      alt    },    },    "historicalFacts": historicalFacts[]-> {      _id,      year,      title,      snippet    }  }
 export type HomePageSingletonQueryResult = {
   hero: {
     _type: "heroBlock";
@@ -1034,6 +1193,28 @@ export type HomePageSingletonQueryResult = {
         thumbnail: null;
       } | null;
     } | null;
+  } | null;
+  carouselOne: {
+    _type: "carouselOne";
+    title?: string;
+    description?: string;
+    size: "one" | "three" | "two" | null;
+    indicators: "count" | "dots" | "none" | null;
+    images: Array<{
+      asset: {
+        _id: string;
+        url: string | null;
+        mimeType: string | null;
+        metadata: {
+          lqip: string | null;
+          dimensions: {
+            width: number | null;
+            height: number | null;
+          } | null;
+        } | null;
+      } | null;
+      alt: string | null;
+    }> | null;
   } | null;
   historicalFacts: Array<{
     _id: string;
@@ -1564,7 +1745,9 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     '*[_type == "settings"][0]': SettingsQueryResult;
-    '\n  *[_type == "homePageSingleton"][0] {\n    "hero": hero[0] {\n      _type,\n      hero {\n        type,\n        fullWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        halfWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        video {\n          title,\n          tagline,\n          thumbnail {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        }\n      }\n    },\n    "historicalFacts": historicalFacts[]-> {\n      _id,\n      year,\n      title,\n      snippet\n    }\n  }\n': HomePageSingletonQueryResult;
+    '\n  *[_type == "aboutPage"][0] {\n    ...,\n    title,\n    description,\n    "content": content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n  }\n': AboutPageQueryResult;
+    '\n  *[_type == "contactPage"][0] {\n    ...,\n    title,\n    description,\n    "content": content[]{\n      ...,\n      markDefs[]{\n        ...,\n        \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n        \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n      }\n    },\n    image {\n      \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n    }\n  }\n': ContactPageQueryResult;
+    '\n  *[_type == "homePageSingleton"][0] {\n    "hero": hero[0] {\n      _type,\n      hero {\n        type,\n        fullWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        halfWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        video {\n          title,\n          tagline,\n          thumbnail {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        }\n      }\n    },\n    "carouselOne": carouselOne {\n      ...,\n        _type,\n        size,\n        indicators,\n        images[]{\n      asset->{\n        _id,\n        url,\n        mimeType,\n        metadata {\n          lqip,\n          dimensions {\n            width,\n            height\n          }\n        }\n      },\n      alt\n    },\n    },\n    "historicalFacts": historicalFacts[]-> {\n      _id,\n      year,\n      title,\n      snippet\n    }\n  }\n': HomePageSingletonQueryResult;
     '\n  *[_type == \'resourcePage\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "post": post->slug.current\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "sourceGroup" => {\n        ...,\n        sources[]->{\n          ...,\n          _type == "source" => {\n            ...,\n          }\n        }\n      },\n      _type == "indigenousTranslationBlock" => {\n        _type,\n        _key,\n        heading,\n        description,\n        translations[]-> {\n          _type,\n          languageGroup {\n            name,\n            nativeName,\n            meaning,\n            translator\n          },\n          translations[] {\n            english,\n            indigenous\n          }\n        }\n      },\n    },\n  }\n': GetResourcePageQueryResult;
     '\n  *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {\n    "slug": slug.current,\n    _type,\n    _updatedAt,\n  }\n': SitemapDataResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n    ...,\n    "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n\n  }\n': AllPostsQueryResult;

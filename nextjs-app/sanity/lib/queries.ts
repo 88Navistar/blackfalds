@@ -75,7 +75,39 @@ const imageWithMetadata = /* groq */ `
     }
   }
 `;
-
+export const aboutPageQuery = defineQuery(`
+  *[_type == "aboutPage"][0] {
+    ...,
+    title,
+    description,
+    "content": content[]{
+          ...,
+          markDefs[]{
+            ...,
+            ${linkReference},
+            ${citationReference},
+          }
+        }
+  }
+`);
+export const contactPageQuery = defineQuery(`
+  *[_type == "contactPage"][0] {
+    ...,
+    title,
+    description,
+    "content": content[]{
+      ...,
+      markDefs[]{
+        ...,
+        ${linkReference},
+        ${citationReference},
+      }
+    },
+    image {
+      ${imageWithMetadata}
+    }
+  }
+`);
 export const homePageSingletonQuery = defineQuery(`
   *[_type == "homePageSingleton"][0] {
     "hero": hero[0] {

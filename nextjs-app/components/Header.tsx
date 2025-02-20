@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
   return (
-    <header className="fixed inset-0 z-50 flex h-16 items-center bg-background md:h-28">
+    <header className="fixed inset-0 z-50 flex h-16 items-center bg-gold-200 md:h-28 dark:bg-gold-800">
       <ContainerMD className="">
         <div className="flex items-center justify-between gap-4">
           <Link className="flex items-center gap-2" href="/">
