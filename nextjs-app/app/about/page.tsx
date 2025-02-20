@@ -4,9 +4,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { AboutPageQueryResult } from "@/sanity.types";
 import CustomPortableText from "@/components/PortableText";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { urlForImage } from "@/sanity/lib/utils";
+
 export default async function AboutPage() {
+  // @ts-expect-error
   const { data: aboutPage } = await sanityFetch<AboutPageQueryResult>({
     query: aboutPageQuery,
   });
@@ -24,12 +24,6 @@ export default async function AboutPage() {
         </p>
         <CustomPortableText value={aboutPage?.content} />
       </div>
-      <Image
-        src={urlForImage(aboutPage.image).url()}
-        alt={aboutPage.title}
-        width={aboutPage.image.width}
-        height={aboutPage.image.height}
-      />
     </ContainerMD>
   );
 }

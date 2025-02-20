@@ -8,6 +8,7 @@ import { urlForImage } from "@/sanity/lib/utils";
 import { stegaClean } from "@sanity/client/stega";
 
 export default async function ContactPage() {
+  // @ts-expect-error
   const { data: contactPage } = await sanityFetch<ContactPageType>({
     query: contactPageQuery,
   });
