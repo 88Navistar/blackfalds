@@ -40,12 +40,6 @@ export function resolveOpenGraphImage(image: any, width = 1200, height = 627) {
   return { url, alt: image?.alt as string, width, height };
 }
 
-// Temporary debug - remove after
-import type { Link } from "@/sanity.types";
-type LinkTypes = Link["linkType"];
-// This will show us the exact union type when hovering
-const _debug: LinkTypes = "href";
-
 // Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.
 export function linkResolver(link: Link | undefined) {
   if (!link) return null;

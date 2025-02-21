@@ -5,7 +5,7 @@ import { Crimson_Pro, Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { toPlainText, VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
-
+import { Analytics } from "@vercel/analytics/react";
 import DraftModeToast from "@/components/DraftModeToast";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -103,6 +103,7 @@ export default async function RootLayout({
             <Footer />
           </section>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
