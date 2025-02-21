@@ -45,7 +45,8 @@ export const citationReference = /* groq */ `
 const linkReference = /* groq */ `
   _type == "link" => {
     "resourcePage": resourcePage->slug.current,
-    "post": post->slug.current
+    "project": post->slug.current,
+  
   }
 `;
 

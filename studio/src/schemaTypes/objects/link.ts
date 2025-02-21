@@ -21,9 +21,10 @@ export const link = defineType({
       options: {
         list: [
           {title: 'URL', value: 'href'},
-          {title: 'Resource Page', value: 'resourcePage'},
-          {title: 'Post', value: 'post'},
+          {title: 'Page', value: 'staticpage'},
+          {title: 'Resources', value: 'resourcePage'},
           {title: 'Email', value: 'mail'},
+          {title: 'Project', value: 'post'},
         ],
         layout: 'radio',
       },
@@ -43,31 +44,43 @@ export const link = defineType({
         }),
     }),
     defineField({
+      name: 'staticpage',
+      title: 'Page',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Home', value: '/'},
+          {title: 'About', value: '/about'},
+          {title: 'Contact', value: '/contact'},
+          {title: 'Projects', value: '/projects'},
+        ],
+        layout: 'radio',
+      },
+    }),
+    defineField({
       name: 'resourcePage',
       title: 'Resource Page',
       type: 'reference',
       to: [{type: 'resourcePage'}],
       hidden: ({parent}) => parent?.linkType !== 'resourcePage',
-      validation: (Rule) =>
-        // Custom validation to ensure page reference is provided if the link type is 'page'
-        Rule.custom((value, context: any) => {
-          if (context.parent?.linkType === 'resourcePage' && !value) {
-            return 'Resource Page reference is required when Link Type is Resource Page'
-          }
-          return true
-        }),
     }),
     defineField({
-      name: 'post',
-      title: 'Post',
+      name: 'mail',
+      title: 'Email',
+      type: 'string',
+      hidden: ({parent}) => parent?.linkType !== 'mail',
+    }),
+    defineField({
+      name: 'project',
+      title: 'Project',
       type: 'reference',
       to: [{type: 'post'}],
-      hidden: ({parent}) => parent?.linkType !== 'post',
+      hidden: ({parent}) => parent?.linkType !== 'project',
       validation: (Rule) =>
         // Custom validation to ensure post reference is provided if the link type is 'post'
         Rule.custom((value, context: any) => {
           if (context.parent?.linkType === 'post' && !value) {
-            return 'Post reference is required when Link Type is Post'
+            return 'Project reference is required when Link Type is Project'
           }
           return true
         }),

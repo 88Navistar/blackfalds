@@ -46,8 +46,9 @@ export const blockContent = defineType({
                 options: {
                   list: [
                     {title: 'URL', value: 'href'},
-                    {title: 'Page', value: 'page'},
-                    {title: 'Post', value: 'post'},
+                    {title: 'Page', value: 'staticpage'},
+                    {title: 'Project', value: 'project'},
+                    {title: 'Resources', value: 'resourcePage'},
                     {title: 'Email', value: 'mail'},
                   ],
                   layout: 'radio',
@@ -57,42 +58,35 @@ export const blockContent = defineType({
                 name: 'href',
                 title: 'URL',
                 type: 'url',
-                hidden: ({parent}) => parent?.linkType !== 'href' && parent?.linkType != null,
-                validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'href' && !value) {
-                      return 'URL is required when Link Type is URL'
-                    }
-                    return true
-                  }),
+                hidden: ({parent}) => parent?.linkType !== 'href',
+              }),
+              defineField({
+                name: 'staticpage',
+                title: 'Page',
+                type: 'string',
+                options: {
+                  list: [
+                    {title: 'Home', value: '/'},
+                    {title: 'About', value: '/about'},
+                    {title: 'Contact', value: '/contact'},
+                    {title: 'Projects', value: '/projects'},
+                  ],
+                },
+                hidden: ({parent}) => parent?.linkType !== 'staticpage',
+              }),
+              defineField({
+                name: 'project',
+                title: 'Project',
+                type: 'reference',
+                to: [{type: 'post'}],
+                hidden: ({parent}) => parent?.linkType !== 'project',
               }),
               defineField({
                 name: 'resourcePage',
-                title: 'Resource Page',
+                title: 'Resources',
                 type: 'reference',
                 to: [{type: 'resourcePage'}],
                 hidden: ({parent}) => parent?.linkType !== 'resourcePage',
-                validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'resourcePage' && !value) {
-                      return 'Resource Page reference is required when Link Type is ResourcePage'
-                    }
-                    return true
-                  }),
-              }),
-              defineField({
-                name: 'post',
-                title: 'Post',
-                type: 'reference',
-                to: [{type: 'post'}],
-                hidden: ({parent}) => parent?.linkType !== 'post',
-                validation: (Rule) =>
-                  Rule.custom((value, context: any) => {
-                    if (context.parent?.linkType === 'post' && !value) {
-                      return 'Post reference is required when Link Type is Post'
-                    }
-                    return true
-                  }),
               }),
               defineField({
                 name: 'mail',

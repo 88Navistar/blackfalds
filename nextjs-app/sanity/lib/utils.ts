@@ -40,11 +40,16 @@ export function resolveOpenGraphImage(image: any, width = 1200, height = 627) {
   return { url, alt: image?.alt as string, width, height };
 }
 
+// Temporary debug - remove after
+import type { Link } from "@/sanity.types";
+type LinkTypes = Link["linkType"];
+// This will show us the exact union type when hovering
+const _debug: LinkTypes = "href";
+
 // Depending on the type of link, we need to fetch the corresponding page, post, or URL.  Otherwise return null.
 export function linkResolver(link: Link | undefined) {
   if (!link) return null;
 
-  // If linkType is not set but href is, lets set linkType to "href".  This comes into play when pasting links into the portable text editor because a link type is not assumed.
   if (!link.linkType && link.href) {
     link.linkType = "href";
   }
@@ -52,12 +57,14 @@ export function linkResolver(link: Link | undefined) {
   switch (link.linkType) {
     case "href":
       return link.href || null;
+    case "staticpage":
+      return link.staticpage || null;
     case "resourcePage":
       if (link?.resourcePage && typeof link.resourcePage === "string") {
         return `/resources/${link.resourcePage}`;
       }
       break;
-    case "post":
+    case "project":
       if (link?.post && typeof link.post === "string") {
         return `/projects/${link.post}`;
       }
