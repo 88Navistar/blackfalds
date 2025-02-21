@@ -20,9 +20,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const domain: String = headersList.get("host") as string;
 
   if (allPostsAndPages != null && allPostsAndPages.length != 0) {
-    // Add resources index page
+    // Add projects index page
     sitemap.push({
-      url: `${domain}/resources`,
+      url: `${domain}/projects`,
       lastModified: new Date().toISOString(),
     });
 
