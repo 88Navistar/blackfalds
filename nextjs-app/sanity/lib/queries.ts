@@ -30,6 +30,9 @@ const postFields = /* groq */ `
   },
   "date": coalesce(date, _updatedAt),
   "author": author->{firstName, lastName, picture},
+  "category": category->{
+    name
+  },
 `;
 export const citationReference = /* groq */ `
   _type == "citation" => {
@@ -46,7 +49,10 @@ const linkReference = /* groq */ `
   _type == "link" => {
     "resourcePage": resourcePage->slug.current,
     "project": post->slug.current,
-  
+    "href": href,
+    "staticpage": staticpage,
+    "mail": mail,
+    "openInNewTab": openInNewTab
   }
 `;
 

@@ -8,9 +8,10 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { allPostsQuery, morePostsQuery } from "@/sanity/lib/queries";
 
 import { Card, CardContent, CardHeader } from "./ui/card";
+import { Badge } from "./ui/badge";
 
 const Post = ({ post }: { post: PostType }) => {
-  const { _id, title, slug, excerpt, date, coverImage } = post;
+  const { _id, title, slug, excerpt, date, coverImage, category } = post;
 
   return (
     <Card
@@ -29,8 +30,13 @@ const Post = ({ post }: { post: PostType }) => {
 
       <div className="flex flex-1 flex-col">
         <CardHeader className="space-y-2">
-          <div className="text-sm text-green-700/50 dark:text-green-300/50">
-            <DateComponent dateString={date} />
+          <div className="text-sm">
+            {/* <DateComponent dateString={date} /> */}
+            {category && (
+              <Badge variant="green" className="text-sm text-stone-200">
+                {category.name}
+              </Badge>
+            )}
           </div>
 
           <h3 className="font-headings text-3xl font-semibold text-stone-900 dark:text-stone-100">
