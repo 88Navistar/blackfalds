@@ -4,7 +4,7 @@ import { ContainerMD } from "@/components/ContainerMD";
 import { AllPosts, FeaturedPosts } from "@/components/Posts";
 export default async function ProjectsPage() {
   return (
-    <ContainerMD className="">
+    <ContainerMD className="flex flex-col items-center pt-16">
       <div className="max-w-prose">
         <h1 className="py-4 font-headings text-fluid-2xl font-bold text-pretty md:text-fluid-2xl">
           Projects and Initiatives

@@ -15,37 +15,37 @@ import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
 
 const Post = ({ post }: { post: PostType }) => {
-  const { _id, title, slug, excerpt, date, coverImage, category } = post;
+  const { _id, title, slug, excerpt, coverImage, category } = post;
 
   return (
     <Card
       key={_id}
-      className="flex max-w-xl flex-col bg-stone-50 ring-2 shadow-lg ring-stone-900/20 dark:bg-brawn-800/40 dark:ring-stone-100/20"
+      className="flex max-w-xl flex-col bg-stone-50 ring-2 shadow-lg ring-lime-900/20 dark:bg-brawn-800/40 dark:ring-lime-100/20"
     >
-      {coverImage ? (
-        <div className="aspect-[16/9] w-full overflow-hidden rounded-t-lg bg-gold-100 dark:bg-gold-900">
-          <div className="flex h-full items-center justify-center">
-            <PostsImage image={coverImage} />
+      <Link
+        className="transition-colors hover:text-red-500"
+        href={`/projects/${slug}`}
+      >
+        {coverImage ? (
+          <div className="aspect-[16/9] w-full overflow-hidden rounded-t-lg bg-gold-100 dark:bg-gold-900">
+            <div className="flex h-full items-center justify-center transition-all duration-300 hover:scale-105">
+              <PostsImage image={coverImage} />
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="aspect-[16/9] w-full rounded-t-lg bg-gold-100 dark:bg-gold-900" />
-      )}
-
+        ) : (
+          <div className="aspect-[16/9] w-full rounded-t-lg bg-gold-100 dark:bg-gold-900" />
+        )}
+      </Link>
       <div className="flex flex-1 flex-col">
         <CardHeader className="space-y-2">
-          <div className="text-sm">
-            {/* <DateComponent dateString={date} /> */}
-            {category && (
-              <Badge variant="green" className="text-sm text-stone-200">
-                {category.name}
-              </Badge>
-            )}
-          </div>
-
+          {category && (
+            <Badge variant="green" className="text-sm text-stone-200">
+              {category.name}
+            </Badge>
+          )}
           <h3 className="font-headings text-3xl font-semibold text-stone-900 dark:text-stone-100">
             <Link
-              className="transition-colors hover:text-red-500"
+              className="transition-colors hover:text-lime-600"
               href={`/projects/${slug}`}
             >
               {title}
@@ -107,7 +107,7 @@ export const MorePosts = async ({
   }
 
   return (
-    <div className="rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
+    <div className="mb-4 rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
       <Posts heading={`Recent Posts (${data?.length})`}>
         {data?.map((post: any) => <Post key={post._id} post={post} />)}
       </Posts>
@@ -122,12 +122,12 @@ export const FeaturedPosts = async () => {
   }
 
   return (
-    <div className="rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
+    <div className="mb-4 rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
       <Posts
         heading="Featured Projects"
-        subHeading={`Total Featured Posts ${data.length} `}
+        subHeading="These are some of our favorite projects"
       >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {data.map((post: any) => (
             <Post key={post._id} post={post} />
           ))}
@@ -144,12 +144,12 @@ export const AllPosts = async () => {
   }
 
   return (
-    <div className="rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
+    <div className="mb-4 rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
       <Posts
-        heading="Projects Page"
-        subHeading={`Total Projects ${data.length} `}
+        heading="All Projects"
+        subHeading={`The Society's Projects ${data.length} `}
       >
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {data.map((post: any) => (
             <Post key={post._id} post={post} />
           ))}

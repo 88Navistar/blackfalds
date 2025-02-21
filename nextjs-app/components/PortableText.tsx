@@ -92,7 +92,7 @@ export default function CustomPortableText({
   return (
     <div
       className={[
-        "prose prose-stone md:prose-lg dark:prose-invert prose-a:text-red-600",
+        "prose prose-stone md:prose-lg dark:prose-invert prose-a:text-lime-600",
         className,
       ]
         .filter(Boolean)
