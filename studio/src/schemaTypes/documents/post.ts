@@ -38,6 +38,13 @@ export const post = defineType({
       to: [{type: 'category'}],
     }),
     defineField({
+      name: 'featured',
+      title: 'Featured',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Featured posts will be displayed on the 1st row.',
+    }),
+    defineField({
       name: 'coverImage',
       title: 'Cover Image',
       type: 'image',

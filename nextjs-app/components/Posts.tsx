@@ -5,7 +5,11 @@ import OnBoarding from "@/components/Onboarding";
 import PostsImage from "@/components/PostsImage";
 import { Post as PostType } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
-import { allPostsQuery, morePostsQuery } from "@/sanity/lib/queries";
+import {
+  allPostsQuery,
+  morePostsQuery,
+  featuredPostsQuery,
+} from "@/sanity/lib/queries";
 
 import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
@@ -110,7 +114,28 @@ export const MorePosts = async ({
     </div>
   );
 };
+export const FeaturedPosts = async () => {
+  const { data } = await sanityFetch({ query: featuredPostsQuery });
 
+  if (!data || data.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
+      <Posts
+        heading="Featured Projects"
+        subHeading={`Total Featured Posts ${data.length} `}
+      >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {data.map((post: any) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
+      </Posts>
+    </div>
+  );
+};
 export const AllPosts = async () => {
   const { data } = await sanityFetch({ query: allPostsQuery });
 

@@ -33,6 +33,7 @@ const postFields = /* groq */ `
   "category": category->{
     name
   },
+  "featured": featured,
 `;
 export const citationReference = /* groq */ `
   _type == "citation" => {
@@ -242,7 +243,11 @@ export const allPostsQuery = defineQuery(`
     ${postFields}
   }
 `);
-
+export const featuredPostsQuery = defineQuery(`
+  *[_type == "post" && featured == true && defined(slug.current)] | order(date desc, _updatedAt desc) {
+    ${postFields}
+  }
+`);
 export const morePostsQuery = defineQuery(`
   *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {
     ${postFields}
