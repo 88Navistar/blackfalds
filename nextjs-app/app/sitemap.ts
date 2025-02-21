@@ -10,50 +10,45 @@ import { sitemapData } from "@/sanity/lib/queries";
  */
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const allPostsAndPages = await sanityFetch({
+  const { data: allPostsAndPages } = await sanityFetch({
     query: sitemapData,
   });
+
+  //console.log(allPostsAndPages);
   const headersList = await headers();
   const sitemap: MetadataRoute.Sitemap = [];
   const domain: String = headersList.get("host") as string;
-  sitemap.push({
-    url: domain as string,
-    lastModified: new Date(),
-    priority: 1,
-    changeFrequency: "monthly",
-  });
 
-  if (allPostsAndPages != null && allPostsAndPages.data.length != 0) {
-    let priority: number;
-    let changeFrequency:
-      | "monthly"
-      | "always"
-      | "hourly"
-      | "daily"
-      | "weekly"
-      | "yearly"
-      | "never"
-      | undefined;
-    let url: string;
+  if (allPostsAndPages != null && allPostsAndPages.length != 0) {
+    // Add resources index page
+    sitemap.push({
+      url: `${domain}/resources`,
+      lastModified: new Date().toISOString(),
+    });
 
-    for (const p of allPostsAndPages.data) {
+    let url = "";
+
+    for (const p of allPostsAndPages) {
       switch (p._type) {
-        case "page":
-          priority = 0.8;
-          changeFrequency = "monthly";
-          url = `${domain}/${p.slug}`;
+        case "homePageSingleton":
+          url = `${domain}`;
+          break;
+        case "aboutPage":
+          url = `${domain}/about`;
+          break;
+        case "contactPage":
+          url = `${domain}/contact`;
+          break;
+        case "resourcePage":
+          url = `${domain}/resources/${p.slug}`;
           break;
         case "post":
-          priority = 0.5;
-          changeFrequency = "never";
           url = `${domain}/projects/${p.slug}`;
           break;
       }
       sitemap.push({
-        lastModified: p._updatedAt || new Date(),
-        priority,
-        changeFrequency,
         url,
+        lastModified: p._updatedAt,
       });
     }
   }

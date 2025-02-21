@@ -12,11 +12,9 @@ export default [
   // Next.js's ESLint configuration is automatically loaded
   {
     ignores: ["**/node_modules/**", ".next/**", "dist/**", "./sanity.types.ts"],
-    linterOptions: {
-    
-  },
-  files: ["**/*.{js,jsx,ts,tsx}"],
-  languageOptions: {
+    linterOptions: {},
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    languageOptions: {
       parser: tsParser,
       parserOptions: {
         ecmaVersion: "latest",
@@ -28,7 +26,7 @@ export default [
       globals: {
         React: true,
         JSX: true,
-        URL: 'readonly',
+        URL: "readonly",
       },
     },
     plugins: {
@@ -40,24 +38,21 @@ export default [
       "prettier/prettier": "error",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
-        { argsIgnorePattern: '^_' },
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" },
       ],
-      'no-console': 'off',
+      "no-console": "off",
       "no-unused-vars": "warn",
       "no-undef": "warn",
       "no-undef-init": "warn",
-      "no-unused-imports": "warn",
       "no-unused-expressions": "warn",
-      "no-unused-labels": "warn",
-      "no-unused-catch": "warn",
     },
     settings: {
       react: {
-        version: "detect"
-      }
+        version: "detect",
+      },
     },
   },
 ];

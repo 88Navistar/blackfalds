@@ -1,5 +1,4 @@
 import { defineQuery } from "next-sanity";
-
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
 const postFields = /* groq */ `
@@ -231,10 +230,39 @@ export const getResourcePageQuery = defineQuery(`
 `);
 
 export const sitemapData = defineQuery(`
-  *[_type == "resourcePage" || _type == "post" && defined(slug.current)] | order(_type asc) {
-    "slug": slug.current,
-    _type,
-    _updatedAt,
+  *[
+    _type == "resourcePage" || 
+    _type == "post" || 
+    _type == "aboutPage" ||
+    _type == "contactPage" ||
+    _type == "homePageSingleton" ||
+    _type == "projectPage"
+  ] | order(_type asc) {
+    _type == "homePageSingleton" => {
+      "slug": "",
+      "_type": _type,
+      "_updatedAt": _updatedAt
+    },
+    _type == "aboutPage" => {
+      "slug": "about",
+      "_type": _type,
+      "_updatedAt": _updatedAt
+    },
+    _type == "contactPage" => {
+      "slug": "contact",
+      "_type": _type,
+      "_updatedAt": _updatedAt
+    },
+    _type == "projectPage" => {
+      "slug": "projects",
+      "_type": _type,
+      "_updatedAt": _updatedAt
+    },
+    _type in ["resourcePage", "post"] => {
+      "slug": slug.current,
+      "_type": _type,
+      "_updatedAt": _updatedAt
+    }
   }
 `);
 

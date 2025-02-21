@@ -1,11 +1,12 @@
+import { stegaClean } from "@sanity/client/stega";
+import Image from "next/image";
+
 import { ContainerMD } from "@/components/ContainerMD";
+import CustomPortableText from "@/components/PortableText";
+import { ContactPage as ContactPageType } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
 import { contactPageQuery } from "@/sanity/lib/queries";
-import { ContactPage as ContactPageType } from "@/sanity.types";
-import CustomPortableText from "@/components/PortableText";
-import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/utils";
-import { stegaClean } from "@sanity/client/stega";
 
 export default async function ContactPage() {
   // @ts-expect-error

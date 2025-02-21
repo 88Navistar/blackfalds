@@ -1,10 +1,11 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { getResourcePageQuery, resourcePagesSlugs } from "@/sanity/lib/queries";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+
+import { ContainerMD } from "@/components/ContainerMD";
 import PageBuilderPage from "@/components/PageBuilder";
 import { GetResourcePageQueryResult } from "@/sanity.types";
-import { ContainerMD } from "@/components/ContainerMD";
+import { sanityFetch } from "@/sanity/lib/live";
+import { getResourcePageQuery, resourcePagesSlugs } from "@/sanity/lib/queries";
 
 type Props = {
   params: Promise<{ slug: string }>;

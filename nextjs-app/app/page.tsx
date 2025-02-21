@@ -1,15 +1,15 @@
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
 import { ContainerMD } from "@/components/ContainerMD";
-import { AllPosts } from "@/components/Posts";
-import { homePageSingletonQuery } from "@/sanity/lib/queries";
-import { sanityFetch } from "@/sanity/lib/live";
-import { HomePageSingleton } from "@/sanity.types";
-import { notFound } from "next/navigation";
 import HistoricalTimeline from "@/components/HistoricalTimeline";
-import HeroSection from "@/components/modules/heros/HeroSection";
 import CarouselOne from "@/components/modules/carousel-one";
+import HeroSection from "@/components/modules/heros/HeroSection";
+import { AllPosts } from "@/components/Posts";
+import { HomePageSingleton } from "@/sanity.types";
+import { sanityFetch } from "@/sanity/lib/live";
+import { homePageSingletonQuery } from "@/sanity/lib/queries";
 
 export default async function HomePage() {
   const [{ data: homePageSingleton }] = await Promise.all([

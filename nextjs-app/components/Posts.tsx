@@ -1,18 +1,17 @@
 import Link from "next/link";
 
 import DateComponent from "@/components/Date";
-import OnBoarding from "@/components/Onboarding";
 import PostsImage from "@/components/PostsImage";
 import { Post as PostType } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   allPostsQuery,
-  morePostsQuery,
   featuredPostsQuery,
+  morePostsQuery,
 } from "@/sanity/lib/queries";
 
-import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
+import { Card, CardContent, CardHeader } from "./ui/card";
 
 const Post = ({ post }: { post: PostType }) => {
   const { _id, title, slug, excerpt, coverImage, category } = post;
@@ -20,7 +19,7 @@ const Post = ({ post }: { post: PostType }) => {
   return (
     <Card
       key={_id}
-      className="flex max-w-xl flex-col bg-stone-50 ring-2 shadow-lg ring-lime-900/20 dark:bg-brawn-800/40 dark:ring-lime-100/20"
+      className="flex max-w-xl flex-col bg-stone-50 shadow-lg ring-2 ring-lime-900/20 dark:bg-brawn-800/40 dark:ring-lime-100/20"
     >
       <Link
         className="transition-colors hover:text-red-500"
@@ -140,7 +139,7 @@ export const AllPosts = async () => {
   const { data } = await sanityFetch({ query: allPostsQuery });
 
   if (!data || data.length === 0) {
-    return <OnBoarding />;
+    return null;
   }
 
   return (
