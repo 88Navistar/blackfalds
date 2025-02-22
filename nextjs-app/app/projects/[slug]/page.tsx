@@ -6,7 +6,7 @@ import Avatar from "@/components/Avatar";
 import { ContainerMD } from "@/components/ContainerMD";
 import CoverImage from "@/components/CoverImage";
 import Modules from "@/components/modules/index";
-import { MorePosts } from "@/components/Posts";
+import { MorePosts, MuralMediaPosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { postPagesSlugs, postQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
@@ -95,13 +95,20 @@ export default async function PostPage(props: Props) {
             </article>
           </div>
         </div>
-      </div>
-      <div className="border-t border-gray-100">
-        <ContainerMD className="my-12 grid gap-12 lg:my-24">
-          <aside>
-            <Suspense>{await MorePosts({ skip: post._id, limit: 2 })}</Suspense>
-          </aside>
-        </ContainerMD>
+        <div className="border-t border-gray-100 bg-gold-100 dark:bg-gold-900">
+          <ContainerMD className="my-12 grid gap-12 lg:my-24">
+            <aside>
+              <Suspense>
+                {(() => {
+                  return post.category?.slug?.current === "mural-media" ||
+                    post.category?.slug?.current === "iron-ridge-mural"
+                    ? MuralMediaPosts({ skip: post._id })
+                    : MorePosts({ skip: post._id, limit: 2 });
+                })()}
+              </Suspense>
+            </aside>
+          </ContainerMD>
+        </div>
       </div>
     </>
   );

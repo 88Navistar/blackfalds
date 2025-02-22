@@ -30,7 +30,8 @@ const postFields = /* groq */ `
   "date": coalesce(date, _updatedAt),
   "author": author->{firstName, lastName, picture},
   "category": category->{
-    name
+    name,
+    slug
   },
   "featured": featured,
 `;
@@ -281,7 +282,16 @@ export const morePostsQuery = defineQuery(`
     ${postFields}
   }
 `);
-
+export const muralMediaQuery = defineQuery(`
+  *[
+    _type == "post" && 
+    defined(slug.current) && 
+    _id != $skip &&
+    category->slug.current in ["mural-media", "iron-ridge-mural"]
+  ] {
+    ${postFields}
+  }
+`);
 export const postQuery = defineQuery(`
   *[_type == "post" && slug.current == $slug] [0] {
     ${postFields}

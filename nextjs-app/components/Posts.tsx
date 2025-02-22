@@ -8,6 +8,7 @@ import {
   allPostsQuery,
   featuredPostsQuery,
   morePostsQuery,
+  muralMediaQuery,
 } from "@/sanity/lib/queries";
 
 import { Badge } from "./ui/badge";
@@ -125,6 +126,30 @@ export const FeaturedPosts = async () => {
       <Posts
         heading="Featured Projects"
         subHeading="These are some of our favorite projects"
+      >
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {data.map((post: any) => (
+            <Post key={post._id} post={post} />
+          ))}
+        </div>
+      </Posts>
+    </div>
+  );
+};
+export const MuralMediaPosts = async ({ skip }: { skip: string }) => {
+  const { data } = await sanityFetch({
+    query: muralMediaQuery,
+    params: { skip },
+  });
+  if (!data || data.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mb-4 rounded-lg bg-stone-100/80 p-4 md:p-8 dark:bg-gold-900">
+      <Posts
+        heading="Mural Media Projects"
+        subHeading="More Mural Media Projects from the Iron Ridge Secondary Campus Mural"
       >
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           {data.map((post: any) => (
