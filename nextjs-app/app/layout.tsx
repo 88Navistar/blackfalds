@@ -1,21 +1,22 @@
 import "./globals.css";
 
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Crimson_Pro, Inter } from "next/font/google";
 import { draftMode } from "next/headers";
 import { toPlainText, VisualEditing } from "next-sanity";
 import { Toaster } from "sonner";
-import { Analytics } from "@vercel/analytics/react";
+
 import DraftModeToast from "@/components/DraftModeToast";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import { TailwindIndicator } from "@/components/TailwindIndicator";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
 import { settingsQuery } from "@/sanity/lib/queries";
 import { resolveOpenGraphImage } from "@/sanity/lib/utils";
 
 import { handleError } from "./client-utils";
-import { TailwindIndicator } from "@/components/TailwindIndicator";
 import { ThemeProvider } from "./providers";
 /**
  * Generate metadata for the page.
@@ -31,11 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = settings?.description || demo.description;
 
   const ogImage = resolveOpenGraphImage(settings?.ogImage);
-  let metadataBase: URL | undefined = undefined;
+  let metadataBase: URL | undefined;
   try {
     metadataBase = settings?.ogImage?.metadataBase
       ? new URL(settings.ogImage.metadataBase)
-      : undefined;
+      : new URL("https://www.blackfaldshistoricalsociety.com");
   } catch {
     // ignore
   }
