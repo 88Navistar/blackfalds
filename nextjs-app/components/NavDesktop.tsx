@@ -41,7 +41,11 @@ const Link = ({
 
 export function NavDesktop({ pathname }: { pathname: string }) {
   return (
-    <NavigationMenu viewport={false} aria-label="Main navigation">
+    <NavigationMenu
+      viewport={false}
+      aria-label="Main navigation"
+      className="rounded-lg bg-lime-900 px-12 py-6 lg:px-28"
+    >
       <NavigationMenuList>
         {navItems.map(item => (
           <NavigationMenuItem

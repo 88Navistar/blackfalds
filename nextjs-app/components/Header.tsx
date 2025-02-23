@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { NavDesktop } from "@/components/NavDesktop";
 import NavMobile from "@/components/NavMobile";
-import { ModeToggle } from "./ModeToggle";
+
 import { ContainerMD } from "./ContainerMD";
-import { usePathname } from "next/navigation";
+import { ModeToggle } from "./ModeToggle";
 
 export default function Header() {
   const pathname = usePathname();
