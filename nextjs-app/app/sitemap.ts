@@ -16,13 +16,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   //console.log(allPostsAndPages);
   const headersList = await headers();
+  const domain: string = headersList.get("host") as string;
+  const protocol: string = headersList.get("x-forwarded-proto") || "https";
+
   const sitemap: MetadataRoute.Sitemap = [];
-  const domain: String = headersList.get("host") as string;
 
   if (allPostsAndPages != null && allPostsAndPages.length != 0) {
     // Add projects index page
     sitemap.push({
-      url: `${domain}/projects`,
+      url: `${protocol}://${domain}/projects`,
       lastModified: new Date().toISOString(),
     });
 
@@ -31,19 +33,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const p of allPostsAndPages) {
       switch (p._type) {
         case "homePageSingleton":
-          url = `${domain}`;
+          url = `${protocol}://${domain}`;
           break;
         case "aboutPage":
-          url = `${domain}/about`;
+          url = `${protocol}://${domain}/about`;
           break;
         case "contactPage":
-          url = `${domain}/contact`;
+          url = `${protocol}://${domain}/contact`;
           break;
         case "resourcePage":
-          url = `${domain}/resources/${p.slug}`;
+          url = `${protocol}://${domain}/resources/${p.slug}`;
           break;
         case "post":
-          url = `${domain}/projects/${p.slug}`;
+          url = `${protocol}://${domain}/projects/${p.slug}`;
           break;
       }
       sitemap.push({
