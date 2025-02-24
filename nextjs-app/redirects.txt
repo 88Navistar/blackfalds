@@ -1,0 +1,104 @@
+Source: /:path*
+Destination: /:path*
+Permanent: true
+
+Source: /:path*
+Destination: /:path*
+Permanent: true
+
+Source: /index.:ext(php|html)?
+Destination: /
+Permanent: true
+
+Source: /:path+(?!php|html|xml)/
+Destination: /:path+
+Permanent: true
+
+Source: /:path*.php
+Destination: /:path*
+Permanent: true
+
+Source: /sitemap.php
+Destination: /sitemap.xml
+Permanent: true
+
+Source: /donation.:(php|html)?
+Destination: /about
+Permanent: true
+
+Source: /trivia.:(php|html)?
+Destination: /
+Permanent: true
+
+Source: /location.:(php|html)?
+Destination: /contact
+Permanent: true
+
+Source: /contact.:(php|html)?
+Destination: /contact
+Permanent: true
+
+Source: /veterans.:(php|html)?
+Destination: /projects/blackfalds-veterans-memorial
+Permanent: true
+
+Source: /faith.:(php|html)?
+Destination: /
+Permanent: true
+
+Source: /walkingtours.:(php|html)?
+Destination: /projects/on-this-spot-blackfalds-history-at-your-fingertips
+Permanent: true
+
+Source: /pdfs/Wigmore-Uniform-Project.pdf
+Destination: /projects/the-wigmore-uniform-project
+Permanent: true
+
+Source: /mural.:(php|html)?
+Destination: /projects/iron-ridge-secondary-campus-mural
+Permanent: true
+
+Source: /mural-gregson.:(php|html)?
+Destination: /projects/arthur-d-gregson-entomologist
+Permanent: true
+
+Source: /mural-buffalotrail.:(php|html)?
+Destination: /projects/buffalo-lake-trail
+Permanent: true
+
+Source: /mural-whitfordhouse.:(php|html)?
+Destination: /projects/whitford-stopping-house
+Permanent: true
+
+Source: /mural-CEtrail.:(php|html)?
+Destination: /projects/c-and-e-trail
+Permanent: true
+
+Source: /mural-early.:(php|html)?
+Destination: /projects/early-exploration-alberta
+Permanent: true
+
+Source: /mural-Dam.:(php|html)?
+Destination: /projects/blindman-river-dam
+Permanent: true
+
+Source: /mural-Name.:(php|html)?
+Destination: /projects/how-the-blindman-river-got-its-name
+Permanent: true
+
+Source: /translations.:(php|html)?
+Destination: /resources/indigenous-translations
+Permanent: true
+
+Source: /sources.:(php|html)?
+Destination: /resources/mural-sources
+Permanent: true
+
+Source: /membership.:(html)?
+Destination: /
+Permanent: true
+
+Source: /help.:(html)?
+Destination: /
+Permanent: true
+
