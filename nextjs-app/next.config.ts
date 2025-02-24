@@ -21,7 +21,29 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/index.php",
+        source: "/:path*",
+        destination: "/:path*",
+        permanent: true,
+        has: [
+          {
+            type: "host",
+            value: "blackfaldshistoricalsociety.com",
+          },
+        ],
+      },
+      {
+        source: "/:path*",
+        destination: "/:path*",
+        permanent: true,
+        has: [
+          {
+            type: "host",
+            value: "www.blackfaldshistoricalsociety.com",
+          },
+        ],
+      },
+      {
+        source: "/index.:(php|html)?",
         destination: "/",
         permanent: true,
       },
@@ -31,63 +53,37 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/donation.php",
+        source: "/donation.:(php|html)?",
         destination: "/about",
         permanent: true,
       },
       {
-        source: "/trivia.php",
+        source: "/trivia.:(php|html)?",
         destination: "/",
         permanent: true,
       },
       {
-        source: "/trivia.html",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/location.php",
+        source: "/location.:(php|html)?",
         destination: "/contact",
         permanent: true,
       },
       {
-        source: "/location.html",
+        source: "/contact.:(php|html)?",
         destination: "/contact",
         permanent: true,
       },
       {
-        source: "/contact.php",
-        destination: "/contact",
-        permanent: true,
-      },
-      {
-        source: "/contact.html",
-        destination: "/contact",
-        permanent: true,
-      },
-      {
-        source: "/veterans.php",
+        source: "/veterans.:(php|html)?",
         destination: "/projects/blackfalds-veterans-memorial",
         permanent: true,
       },
       {
-        source: "/veterans.html",
-        destination: "/projects/blackfalds-veterans-memorial",
-        permanent: true,
-      },
-      {
-        source: "/faith.php",
+        source: "/faith.:(php|html)?",
         destination: "/",
         permanent: true,
       },
       {
-        source: "/walkingtours.php",
-        destination:
-          "/projects/on-this-spot-blackfalds-history-at-your-fingertips",
-        permanent: true,
-      },
-      {
-        source: "/walkingtours.html",
+        source: "/walkingtours.:(php|html)?",
         destination:
           "/projects/on-this-spot-blackfalds-history-at-your-fingertips",
         permanent: true,
@@ -98,82 +94,62 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/mural.php",
+        source: "/mural.:(php|html)?",
         destination: "/projects/iron-ridge-secondary-campus-mural",
         permanent: true,
       },
       {
-        source: "/mural-gregson.php",
+        source: "/mural-gregson.:(php|html)?",
         destination: "/projects/arthur-d-gregson-entomologist",
         permanent: true,
       },
       {
-        source: "/mural-buffalotrail.php",
+        source: "/mural-buffalotrail.:(php|html)?",
         destination: "/projects/buffalo-lake-trail",
         permanent: true,
       },
       {
-        source: "/mural-whitfordhouse.php",
+        source: "/mural-whitfordhouse.:(php|html)?",
         destination: "/projects/whitford-stopping-house",
         permanent: true,
       },
       {
-        source: "/mural-CEtrail.php",
+        source: "/mural-CEtrail.:(php|html)?",
         destination: "/projects/c-and-e-trail",
         permanent: true,
       },
       {
-        source: "/mural-early.php",
+        source: "/mural-early.:(php|html)?",
         destination: "/projects/early-exploration-alberta",
         permanent: true,
       },
       {
-        source: "/mural-Dam.php",
+        source: "/mural-Dam.:(php|html)?",
         destination: "/projects/blindman-river-dam",
         permanent: true,
       },
       {
-        source: "/mural-Name.php",
+        source: "/mural-Name.:(php|html)?",
         destination: "/projects/how-the-blindman-river-got-its-name",
         permanent: true,
       },
       {
-        source: "/translations.php",
+        source: "/translations.:(php|html)?",
         destination: "/resources/indigenous-translations",
         permanent: true,
       },
       {
-        source: "/sources.php",
+        source: "/sources.:(php|html)?",
         destination: "/resources/mural-sources",
         permanent: true,
       },
       {
-        source: "/membership.html",
+        source: "/membership.:(html)?",
         destination: "/",
         permanent: true,
       },
       {
-        source: "/help.html",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/faith.php",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/faith.html",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/index.php",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/index.html",
+        source: "/help.:(html)?",
         destination: "/",
         permanent: true,
       },
