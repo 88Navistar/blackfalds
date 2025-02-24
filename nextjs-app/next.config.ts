@@ -41,7 +41,17 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/trivia.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
         source: "/location.php",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/location.html",
         destination: "/contact",
         permanent: true,
       },
@@ -51,7 +61,17 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/contact.html",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
         source: "/veterans.php",
+        destination: "/projects/blackfalds-veterans-memorial",
+        permanent: true,
+      },
+      {
+        source: "/veterans.html",
         destination: "/projects/blackfalds-veterans-memorial",
         permanent: true,
       },
@@ -62,6 +82,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/walkingtours.php",
+        destination:
+          "/projects/on-this-spot-blackfalds-history-at-your-fingertips",
+        permanent: true,
+      },
+      {
+        source: "/walkingtours.html",
         destination:
           "/projects/on-this-spot-blackfalds-history-at-your-fingertips",
         permanent: true,
@@ -119,6 +145,36 @@ const nextConfig: NextConfig = {
       {
         source: "/sources.php",
         destination: "/resources/mural-sources",
+        permanent: true,
+      },
+      {
+        source: "/membership.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/help.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/faith.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/faith.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/index.html",
+        destination: "/",
         permanent: true,
       },
     ];
