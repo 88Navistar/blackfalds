@@ -43,8 +43,18 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/index.:(php|html)?",
+        source: "/index.:ext(php|html)?",
         destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:path+(?!php|html|xml)/",
+        destination: "/:path+",
+        permanent: true,
+      },
+      {
+        source: "/:path*.php",
+        destination: "/:path*",
         permanent: true,
       },
       {
