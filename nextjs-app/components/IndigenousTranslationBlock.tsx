@@ -1,5 +1,3 @@
-import { ContainerMD } from "./ContainerMD";
-
 interface Translation {
   english: string;
   indigenous: string;
@@ -25,11 +23,8 @@ interface BlockProps {
   index: number;
 }
 
-export default function IndigenousTranslationBlock({
-  block,
-  index,
-}: BlockProps) {
-  const { heading, description, translations } = block;
+export default function IndigenousTranslationBlock({ block }: BlockProps) {
+  const { description, translations } = block;
 
   return (
     <section className="space-y-8">
