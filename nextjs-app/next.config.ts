@@ -24,23 +24,13 @@ const nextConfig: NextConfig = {
         source: "/:path*",
         destination: "/:path*",
         permanent: true,
-        has: [
-          {
-            type: "host",
-            value: "blackfaldshistoricalsociety.com",
-          },
-        ],
+        has: [{ type: "host", value: "blackfaldshistoricalsociety.com" }],
       },
       {
         source: "/:path*",
         destination: "/:path*",
         permanent: true,
-        has: [
-          {
-            type: "host",
-            value: "www.blackfaldshistoricalsociety.com",
-          },
-        ],
+        has: [{ type: "host", value: "www.blackfaldshistoricalsociety.com" }],
       },
       {
         source: "/index.:ext(php|html)",
