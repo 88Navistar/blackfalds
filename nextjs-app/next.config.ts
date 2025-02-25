@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/sitemap.php",
+        source: "/sitemap.:ext(php|html)",
         destination: "/sitemap.xml",
         permanent: true,
       },
