@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 
+import Books from "@/components/Books";
 import { ContainerMD } from "@/components/ContainerMD";
 import { AllPosts, FeaturedPosts } from "@/components/Posts";
 export default async function ProjectsPage() {
@@ -14,11 +15,12 @@ export default async function ProjectsPage() {
           Historical Society.
         </p>
       </div>
-      <aside className="py-12 sm:py-20">
-        <Suspense fallback={null}>
-          {await FeaturedPosts()}
-          {await AllPosts()}
-        </Suspense>
+      <aside className="space-y-12 py-12 sm:py-20">
+        <Suspense fallback={null}>{await FeaturedPosts()}</Suspense>
+
+        <Suspense fallback={null}>{await Books()}</Suspense>
+
+        <Suspense fallback={null}>{await AllPosts()}</Suspense>
       </aside>
     </ContainerMD>
   );

@@ -266,7 +266,34 @@ export const sitemapData = defineQuery(`
     }
   }
 `);
-
+export const allBooksQuery = defineQuery(`
+  *[_type == "books" && defined(slug.current == "all-books") ] {
+    title,
+    content[],
+    "books": books[]->{
+      ...,
+      "alt": image.alt,
+      image{
+        "asset": asset{
+          _ref,
+          _type,
+          _type == 'reference' => @-> {
+      url,
+      mimeType,
+      metadata {
+        lqip,
+        dimensions {
+          width,
+          height,
+          aspectRatio
+        }
+      }
+    }
+        }
+      }
+    }
+  }
+`);
 export const allPostsQuery = defineQuery(`
   *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {
     ${postFields}
