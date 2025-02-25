@@ -15,6 +15,7 @@ import {
 } from "next-sanity";
 
 import ResolvedLink from "@/components/ResolvedLink";
+
 import { Citation } from "./Citation";
 
 export default function CustomPortableText({

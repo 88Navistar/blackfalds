@@ -32,22 +32,22 @@ const BookItem = ({ book }: { book: Book }) => {
               src={urlForImage(book.image).url()}
               alt={book.image.alt || book.title}
               fill
-              className="object-cover transition-all duration-300 hover:scale-105"
+              className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
       )}
 
-      <div className="flex flex-1 flex-col">
+      <div className="grid grid-cols-1 gap-1">
         <CardHeader>
-          <h3 className="font-headings text-3xl font-semibold text-stone-900 dark:text-stone-100">
+          <h3 className="font-headings text-fluid-lg font-semibold text-stone-900 dark:text-stone-100">
             {book.title}
           </h3>
         </CardHeader>
 
         <CardContent>
-          <div className="prose-sm prose-stone dark:prose-invert">
+          <div className="prose-sm prose-stone dark:prose-invert prose-p:text-sm">
             <CustomPortableText value={book.content} />
           </div>
         </CardContent>
