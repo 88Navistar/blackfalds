@@ -20,18 +20,25 @@ export default async function ContactPage() {
           {contactPage?.title}
         </h1>
         <p className="pb-4 font-headings text-fluid-lg text-pretty">
-          {contactPage?.description}
+          {contactPage?.description || ""}
         </p>
       </div>
       <div className="space-x-4 md:flex">
-        <CustomPortableText value={contactPage?.content} />
-        <Image
-          src={urlForImage(contactPage?.image)?.url() || ""}
-          alt={stegaClean(contactPage?.image?.alt || "")}
-          width={contactPage?.image?.asset?.metadata?.dimensions?.width || 0}
-          height={contactPage?.image?.asset?.metadata?.dimensions?.height || 0}
-          className="rounded-lg"
-        />
+        <div className="flex-1">
+          <CustomPortableText value={contactPage?.content} />
+        </div>
+        <div className="flex-shrink-0 md:max-w-[40%]">
+          <Image
+            src={urlForImage(contactPage?.image)?.url() || ""}
+            alt={stegaClean(contactPage?.image?.alt || "")}
+            width={contactPage?.image?.asset?.metadata?.dimensions?.width || 0}
+            height={
+              contactPage?.image?.asset?.metadata?.dimensions?.height || 0
+            }
+            className="rounded-lg"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </div>
       </div>
     </ContainerMD>
   );
