@@ -72,6 +72,41 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/pdfs/Arthur-Gregson.pdf",
+        destination: "/projects/arthur-d-gregson-entomologist",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/Whitford-Stopping-House.pdf",
+        destination: "/projects/whitford-stopping-house",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/Blindman-River-Dam.pdf",
+        destination: "/projects/blindman-river-dam",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/Translations.pdf",
+        destination: "/resources/indigenous-translations",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/Blindman-River-Name.pdf",
+        destination: "/projects/blindman-river-dam",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/CE-Trail.pdf",
+        destination: "/projects/c-and-e-trail",
+        permanent: true,
+      },
+      {
+        source: "/pdfs/Early-Exploration.pdf",
+        destination: "/projects/early-exploration-alberta",
+        permanent: true,
+      },
+      {
         source: "/mural.:ext(php|html)",
         destination: "/projects/iron-ridge-secondary-campus-mural",
         permanent: true,
