@@ -1543,7 +1543,7 @@ export type SitemapDataResult = Array<
   | {}
 >;
 // Variable: allBooksQuery
-// Query: *[_type == "books" && defined(slug.current == "all-books") ] {    title,    content[],    "books": books[]->{      ...,      "alt": image.alt,      image{        "asset": asset{          _ref,          _type,          _type == 'reference' => @-> {      url,      mimeType,      metadata {        lqip,        dimensions {          width,          height,          aspectRatio        }      }    }        }      }    }  }
+// Query: *[_type == "books" && defined(slug.current == "all-books") ] {    title,    content[],    "books": books[]->{      image{        alt,        "asset": asset{          _ref,          _type == 'reference' => @-> {      url,      metadata {        dimensions {          width,          height,          aspectRatio        }      }    }        }      }    }  }
 export type AllBooksQueryResult = Array<{
   title: string | null;
   content: Array<{
@@ -1598,21 +1598,12 @@ export type AllBooksQueryResult = Array<{
     _key: string;
   }> | null;
   books: Array<{
-    _id: string;
-    _type: "book";
-    _createdAt: string;
-    _updatedAt: string;
-    _rev: string;
-    title?: string;
-    content?: BlockContent;
     image: {
+      alt: string | null;
       asset: {
         _ref: string;
-        _type: "reference";
         url: string | null;
-        mimeType: string | null;
         metadata: {
-          lqip: string | null;
           dimensions: {
             width: number | null;
             height: number | null;
@@ -1621,7 +1612,6 @@ export type AllBooksQueryResult = Array<{
         } | null;
       } | null;
     } | null;
-    alt: string | null;
   }> | null;
 }>;
 // Variable: allPostsQuery
@@ -2188,7 +2178,7 @@ declare module "@sanity/client" {
     '\n  *[_type == "homePageSingleton"][0] {\n    "hero": hero[0] {\n      _type,\n      hero {\n        type,\n        fullWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        halfWidth {\n          title,\n          tagline,\n          image {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        },\n        video {\n          title,\n          tagline,\n          thumbnail {\n            \n  ...,\n  "asset": asset {\n    _ref,\n    _type,\n    _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n  }\n\n          }\n        }\n      }\n    },\n    "carouselOne": carouselOne {\n      ...,\n        _type,\n        size,\n        indicators,\n        images[]{\n      asset->{\n        _id,\n        url,\n        mimeType,\n        metadata {\n          lqip,\n          dimensions {\n            width,\n            height\n          }\n        }\n      },\n      alt\n    },\n    },\n    "historicalFacts": historicalFacts[]-> {\n      _id,\n      year,\n      title,\n      snippet\n    }\n  }\n': HomePageSingletonQueryResult;
     '\n  *[_type == \'resourcePage\' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    heading,\n    subheading,\n    "pageBuilder": pageBuilder[]{\n      ...,\n      _type == "callToAction" => {\n        \n  link {\n      ...,\n      \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "project": post->slug.current,\n    "href": href,\n    "staticpage": staticpage,\n    "mail": mail,\n    "openInNewTab": openInNewTab\n  }\n\n      }\n,\n      },\n      _type == "infoSection" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            \n  _type == "link" => {\n    "resourcePage": resourcePage->slug.current,\n    "project": post->slug.current,\n    "href": href,\n    "staticpage": staticpage,\n    "mail": mail,\n    "openInNewTab": openInNewTab\n  }\n,\n            \n  _type == "citation" => {\n    ...,\n    citation-> {\n      ...,\n      _id,\n      citationNumber,\n      title\n    }\n  }\n,\n          }\n        }\n      },\n      _type == "sourceGroup" => {\n        ...,\n        sources[]->{\n          ...,\n          _type == "source" => {\n            ...,\n          }\n        }\n      },\n      _type == "indigenousTranslationBlock" => {\n        _type,\n        _key,\n        heading,\n        description,\n        translations[]-> {\n          _type,\n          languageGroup {\n            name,\n            nativeName,\n            meaning,\n            translator\n          },\n          translations[] {\n            english,\n            indigenous\n          }\n        }\n      },\n    },\n  }\n': GetResourcePageQueryResult;
     '\n  *[\n    _type == "resourcePage" || \n    _type == "post" || \n    _type == "aboutPage" ||\n    _type == "contactPage" ||\n    _type == "homePageSingleton" ||\n    _type == "projectPage"\n  ] | order(_type asc) {\n    _type == "homePageSingleton" => {\n      "slug": "",\n      "_type": _type,\n      "_updatedAt": _updatedAt\n    },\n    _type == "aboutPage" => {\n      "slug": "about",\n      "_type": _type,\n      "_updatedAt": _updatedAt\n    },\n    _type == "contactPage" => {\n      "slug": "contact",\n      "_type": _type,\n      "_updatedAt": _updatedAt\n    },\n    _type == "projectPage" => {\n      "slug": "projects",\n      "_type": _type,\n      "_updatedAt": _updatedAt\n    },\n    _type in ["resourcePage", "post"] => {\n      "slug": slug.current,\n      "_type": _type,\n      "_updatedAt": _updatedAt\n    }\n  }\n': SitemapDataResult;
-    '\n  *[_type == "books" && defined(slug.current == "all-books") ] {\n    title,\n    content[],\n    "books": books[]->{\n      ...,\n      "alt": image.alt,\n      image{\n        "asset": asset{\n          _ref,\n          _type,\n          _type == \'reference\' => @-> {\n      url,\n      mimeType,\n      metadata {\n        lqip,\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n        }\n      }\n    }\n  }\n': AllBooksQueryResult;
+    '\n  *[_type == "books" && defined(slug.current == "all-books") ] {\n    title,\n    content[],\n    "books": books[]->{\n      image{\n        alt,\n        "asset": asset{\n          _ref,\n          _type == \'reference\' => @-> {\n      url,\n      metadata {\n        dimensions {\n          width,\n          height,\n          aspectRatio\n        }\n      }\n    }\n        }\n      }\n    }\n  }\n': AllBooksQueryResult;
     '\n  *[_type == "post" && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n    ...,\n    "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n  "category": category->{\n    name,\n    slug\n  },\n  "featured": featured,\n\n  }\n': AllPostsQueryResult;
     '\n  *[_type == "post" && featured == true && defined(slug.current)] | order(date desc, _updatedAt desc) {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n    ...,\n    "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n  "category": category->{\n    name,\n    slug\n  },\n  "featured": featured,\n\n  }\n': FeaturedPostsQueryResult;
     '\n  *[_type == "post" && _id != $skip && defined(slug.current)] | order(date desc, _updatedAt desc) [0...$limit] {\n    \n  _id,\n  "status": select(_originalId in path("drafts.**") => "draft", "published"),\n  "title": coalesce(title, "Untitled"),\n  "slug": slug.current,\n  excerpt,\n  coverImage{\n    ...,\n    "asset": asset{\n    _ref,\n    _type,\n    _type == \'reference\' => @->{\n      url,\n          mimeType,\n          metadata {\n              lqip,\n              dimensions {\n                width,\n                height,\n                aspectRatio\n              }\n      }\n    },\n    \n  }\n  },\n  "date": coalesce(date, _updatedAt),\n  "author": author->{firstName, lastName, picture},\n  "category": category->{\n    name,\n    slug\n  },\n  "featured": featured,\n\n  }\n': MorePostsQueryResult;

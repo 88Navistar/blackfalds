@@ -272,16 +272,13 @@ export const allBooksQuery = defineQuery(`
     content[],
     "books": books[]->{
       ...,
-      "alt": image.alt,
       image{
+        alt,
         "asset": asset{
           _ref,
-          _type,
           _type == 'reference' => @-> {
       url,
-      mimeType,
       metadata {
-        lqip,
         dimensions {
           width,
           height,
