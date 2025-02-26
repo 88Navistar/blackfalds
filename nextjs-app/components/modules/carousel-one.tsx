@@ -89,7 +89,7 @@ export default function CarouselOne({ block }: { block: Carousel1Props }) {
                           />
                         </div>
                         {image.alt && (
-                          <p className="text-center text-sm text-stone-300">
+                          <p className="prose-sm text-center prose-stone dark:prose-invert">
                             {image.alt}
                           </p>
                         )}
