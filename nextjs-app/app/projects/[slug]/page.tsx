@@ -2,7 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
-import { BlogPosting, WithContext } from "schema-dts";
+import { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
 
 import Avatar from "@/components/Avatar";
 import { ContainerMD } from "@/components/ContainerMD";
@@ -80,12 +80,12 @@ export default async function PostPage(props: Props) {
     headline: post.title,
     datePublished: post.date,
     dateModified: post._updatedAt,
-    description: post.excerpt,
+    description: post.excerpt || "",
     articleBody: post.bodyText,
     image: coverImageUrl?.url(),
     author: {
       "@type": "Person",
-      name: `${post.author.firstName} ${post.author.lastName} || "Judy Carleton"`,
+      name: `${post.author?.firstName} ${post.author?.lastName} || "Judy Carleton"`,
     },
     publisher: {
       "@type": "Organization",
@@ -101,6 +101,32 @@ export default async function PostPage(props: Props) {
       "@id": `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
     },
   };
+  const breadcrumbListProject = (post: any) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Projects",
+          item: "https://www.blackfaldshistoricalsociety.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: post.title,
+          item: `https://www.blackfaldshistoricalsociety.com/projects`,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: post.title,
+          item: `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
+        },
+      ],
+    };
+  };
   //console.log(blogPosting);
   return (
     <>
@@ -108,6 +134,13 @@ export default async function PostPage(props: Props) {
         id="blog-posting"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPosting) }}
+      />
+      <Script
+        id="breadcrumb-list-project-slug"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbListProject(post)),
+        }}
       />
       <div className="bg-stone-50 px-2 dark:bg-brawn-950">
         <div className="my-12 space-y-12 lg:my-24">
