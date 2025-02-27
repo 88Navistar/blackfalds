@@ -6,7 +6,6 @@ import HistoricalTimeline from "@/components/HistoricalTimeline";
 import CarouselOne from "@/components/modules/carousel-one";
 import HeroSection from "@/components/modules/heros/HeroSection";
 import { AllPosts } from "@/components/Posts";
-import { HomePageSingleton } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
 import { homePageSingletonQuery } from "@/sanity/lib/queries";
 

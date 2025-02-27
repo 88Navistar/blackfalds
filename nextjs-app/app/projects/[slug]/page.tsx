@@ -101,7 +101,7 @@ export default async function PostPage(props: Props) {
       "@id": `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
     },
   };
-  const breadcrumbListProject = (post: any) => {
+  const breadcrumbList = (post: any): WithContext<BreadcrumbList> => {
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -139,7 +139,7 @@ export default async function PostPage(props: Props) {
         id="breadcrumb-list-project-slug"
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(breadcrumbListProject(post)),
+          __html: JSON.stringify(breadcrumbList(post)),
         }}
       />
       <div className="bg-stone-50 px-2 dark:bg-brawn-950">
