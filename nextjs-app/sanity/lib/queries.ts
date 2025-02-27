@@ -319,6 +319,11 @@ export const muralMediaQuery = defineQuery(`
 export const postQuery = defineQuery(`
   *[_type == "post" && slug.current == $slug] [0] {
     ${postFields}
+    // Calculate everything in one step
+    "bodyText": array::join([
+      coalesce(pt::text(modules[_type == "moduleBlock"][].content[]), ""),
+      coalesce(pt::text(modules[_type == "textWrapImage"][].content[]), "")
+    ], " "),
   modules[]{
       ...,
       _type == "moduleBlock" => {

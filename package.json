@@ -25,5 +25,8 @@
   ],
   "devDependencies": {
     "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "schema-dts": "^1.1.2"
   }
 }

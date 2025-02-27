@@ -1,6 +1,8 @@
 import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { Suspense } from "react";
+import { BlogPosting, WithContext } from "schema-dts";
 
 import Avatar from "@/components/Avatar";
 import { ContainerMD } from "@/components/ContainerMD";
@@ -9,8 +11,7 @@ import Modules from "@/components/modules/index";
 import { MorePosts, MuralMediaPosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { postPagesSlugs, postQuery } from "@/sanity/lib/queries";
-import { resolveOpenGraphImage } from "@/sanity/lib/utils";
-
+import { resolveOpenGraphImage, urlForImage } from "@/sanity/lib/utils";
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -54,6 +55,7 @@ export async function generateMetadata(
         : [],
     title: post?.title,
     description: post?.excerpt,
+
     openGraph: {
       images: ogImage ? [ogImage, ...previousImages] : previousImages,
     },
@@ -69,9 +71,44 @@ export default async function PostPage(props: Props) {
   if (!post?._id) {
     return notFound();
   }
-
+  const coverImageUrl = post.coverImage
+    ? urlForImage(post.coverImage)
+    : undefined;
+  const blogPosting: WithContext<BlogPosting> = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    datePublished: post.date,
+    dateModified: post._updatedAt,
+    description: post.excerpt,
+    articleBody: post.bodyText,
+    image: coverImageUrl?.url(),
+    author: {
+      "@type": "Person",
+      name: `${post.author.firstName} ${post.author.lastName} || "Judy Carleton"`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Blackfalds Historical Society",
+      url: "https://www.blackfaldshistoricalsociety.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://www.blackfaldshistoricalsociety.com/logos/BAHS-logo.png",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
+    },
+  };
+  //console.log(blogPosting);
   return (
     <>
+      <Script
+        id="blog-posting"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPosting) }}
+      />
       <div className="bg-stone-50 px-2 dark:bg-brawn-950">
         <div className="my-12 space-y-12 lg:my-24">
           <div className="space-y-6">
