@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
+import { BreadcrumbList, WithContext } from "schema-dts";
 
 import { ContainerMD } from "@/components/ContainerMD";
 import PageBuilderPage from "@/components/PageBuilder";
@@ -28,7 +30,8 @@ export async function generateStaticParams() {
 /**
  * Generate metadata for the page.
  * Learn more: https://nextjs.org/docs/app/api-reference/functions/generate-metadata#generatemetadata-function
- */
+ */ // Log the slug value
+
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const params = await props.params;
   const { data: page } = await sanityFetch({
@@ -53,11 +56,45 @@ export default async function ResourcePage(props: Props) {
   if (!resourcePage?._id) {
     return notFound();
   }
-
+  const breadcrumbListResource = (resourcePage: any) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: "https://www.blackfaldshistoricalsociety.com/",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Resources",
+          item: "https://www.blackfaldshistoricalsociety.com/resources",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: "Resource",
+          item: `https://www.blackfaldshistoricalsociety.com/resources/${resourcePage.slug}`,
+        },
+      ],
+    };
+  };
   return (
-    <ContainerMD>
-      <h1 className="pt-12 text-4xl font-bold">{resourcePage.name}</h1>
-      <PageBuilderPage page={resourcePage as GetResourcePageQueryResult} />
-    </ContainerMD>
+    <>
+      <Script
+        id="breadcrumb-list-resource-slug"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbListResource(resourcePage)),
+        }}
+      />
+      <ContainerMD>
+        <h1 className="pt-12 text-4xl font-bold">{resourcePage.name}</h1>
+        <PageBuilderPage page={resourcePage as GetResourcePageQueryResult} />
+      </ContainerMD>
+    </>
   );
 }
