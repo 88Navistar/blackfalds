@@ -2,7 +2,7 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Script from "next/script";
 import { Suspense } from "react";
-import { BlogPosting, BreadcrumbList, WithContext } from "schema-dts";
+import { Article, BreadcrumbList, WithContext } from "schema-dts";
 
 import Avatar from "@/components/Avatar";
 import { ContainerMD } from "@/components/ContainerMD";
@@ -74,9 +74,9 @@ export default async function PostPage(props: Props) {
   const coverImageUrl = post.coverImage
     ? urlForImage(post.coverImage)
     : undefined;
-  const blogPosting: WithContext<BlogPosting> = {
+  const blogPosting: WithContext<Article> = {
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
+    "@type": "Article",
     headline: post.title,
     datePublished: post.date,
     dateModified: post._updatedAt,

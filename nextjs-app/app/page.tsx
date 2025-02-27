@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { Suspense } from "react";
+import { Organization, WithContext } from "schema-dts";
 
 import { ContainerMD } from "@/components/ContainerMD";
 import HistoricalTimeline from "@/components/HistoricalTimeline";
@@ -8,6 +10,17 @@ import HeroSection from "@/components/modules/heros/HeroSection";
 import { AllPosts } from "@/components/Posts";
 import { sanityFetch } from "@/sanity/lib/live";
 import { homePageSingletonQuery } from "@/sanity/lib/queries";
+
+const organization: WithContext<Organization> = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Blackfalds & Area Historical Society",
+  url: "https://www.blackfaldshistoricalsociety.com",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://www.blackfaldshistoricalsociety.com/logos/BAHS-logo.png",
+  },
+};
 
 export default async function HomePage() {
   const [{ data: homePageSingleton }] = await Promise.all([
@@ -19,6 +32,11 @@ export default async function HomePage() {
   }
   return (
     <>
+      <Script
+        id="organization"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
+      />
       <div className="min-h-dvh">
         <HeroSection hero={homePageSingleton.hero} />
         <div className="w-full bg-gold-200 py-4 dark:bg-gold-800">
