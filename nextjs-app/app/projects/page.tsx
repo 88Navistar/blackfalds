@@ -15,18 +15,27 @@ const breadcrumbList = (): WithContext<BreadcrumbList> => {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://www.blackfaldshistoricalsociety.com/projects",
     itemListElement: [
       {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: "https://www.blackfaldshistoricalsociety.com",
+        item: {
+          name: "Home",
+          "@type": "WebPage",
+          "@id": "https://www.blackfaldshistoricalsociety.com",
+        },
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Projects",
-        item: "https://www.blackfaldshistoricalsociety.com/projects",
+        item: {
+          name: "Projects",
+          "@type": "WebPage",
+          "@id": "https://www.blackfaldshistoricalsociety.com/projects",
+        },
       },
     ],
   };

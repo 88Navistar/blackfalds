@@ -12,18 +12,27 @@ import { aboutPageQuery } from "@/sanity/lib/queries";
 const breadcrumbListAbout: WithContext<BreadcrumbList> = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": "https://www.blackfaldshistoricalsociety.com/about",
   itemListElement: [
     {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.blackfaldshistoricalsociety.com/",
+      item: {
+        name: "Home",
+        "@type": "WebPage",
+        "@id": "https://www.blackfaldshistoricalsociety.com/",
+      },
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "About",
-      item: "https://www.blackfaldshistoricalsociety.com/about",
+      item: {
+        name: "About",
+        "@type": "WebPage",
+        "@id": "https://www.blackfaldshistoricalsociety.com/about",
+      },
     },
   ],
 };

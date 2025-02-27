@@ -60,24 +60,37 @@ export default async function ResourcePage(props: Props) {
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `https://www.blackfaldshistoricalsociety.com/resources/${resourcePage.slug}`,
       itemListElement: [
         {
           "@type": "ListItem",
           position: 1,
           name: "Home",
-          item: "https://www.blackfaldshistoricalsociety.com/",
+          item: {
+            name: "Home",
+            "@type": "WebPage",
+            "@id": "https://www.blackfaldshistoricalsociety.com/",
+          },
         },
         {
           "@type": "ListItem",
           position: 2,
           name: "Resources",
-          item: "https://www.blackfaldshistoricalsociety.com/resources",
+          item: {
+            name: "Resources",
+            "@type": "WebPage",
+            "@id": "https://www.blackfaldshistoricalsociety.com/resources",
+          },
         },
         {
           "@type": "ListItem",
           position: 3,
-          name: "Resource",
-          item: `https://www.blackfaldshistoricalsociety.com/resources/${resourcePage.slug}`,
+          name: resourcePage.name,
+          item: {
+            name: resourcePage.name,
+            "@type": "WebPage",
+            "@id": `https://www.blackfaldshistoricalsociety.com/resources/${resourcePage.slug}`,
+          },
         },
       ],
     };

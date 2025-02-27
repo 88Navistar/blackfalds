@@ -80,7 +80,7 @@ export default async function PostPage(props: Props) {
     headline: post.title,
     datePublished: post.date,
     dateModified: post._updatedAt,
-    description: post.excerpt || "",
+    about: post.excerpt || "",
     articleBody: post.bodyText,
     image: coverImageUrl?.url(),
     author: {
@@ -105,24 +105,37 @@ export default async function PostPage(props: Props) {
     return {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
+      "@id": `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
       itemListElement: [
         {
           "@type": "ListItem",
           position: 1,
-          name: "Projects",
-          item: "https://www.blackfaldshistoricalsociety.com",
+          name: "Home",
+          item: {
+            name: "Home",
+            "@type": "WebPage",
+            "@id": "https://www.blackfaldshistoricalsociety.com",
+          },
         },
         {
           "@type": "ListItem",
           position: 2,
-          name: post.title,
-          item: `https://www.blackfaldshistoricalsociety.com/projects`,
+          name: "Projects",
+          item: {
+            name: "Projects",
+            "@type": "WebPage",
+            "@id": "https://www.blackfaldshistoricalsociety.com/projects",
+          },
         },
         {
           "@type": "ListItem",
           position: 3,
           name: post.title,
-          item: `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
+          item: {
+            name: post.title,
+            "@type": "WebPage",
+            "@id": `https://www.blackfaldshistoricalsociety.com/projects/${post.slug}`,
+          },
         },
       ],
     };

@@ -15,18 +15,27 @@ import { urlForImage } from "@/sanity/lib/utils";
 const breadcrumbListContact: WithContext<BreadcrumbList> = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": "https://www.blackfaldshistoricalsociety.com/contact",
   itemListElement: [
     {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: "https://www.blackfaldshistoricalsociety.com/",
+      item: {
+        name: "Home",
+        "@type": "WebPage",
+        "@id": "https://www.blackfaldshistoricalsociety.com/",
+      },
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Contact",
-      item: "https://www.blackfaldshistoricalsociety.com/contact",
+      item: {
+        name: "Contact",
+        "@type": "WebPage",
+        "@id": "https://www.blackfaldshistoricalsociety.com/contact",
+      },
     },
   ],
 };
