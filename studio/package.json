@@ -17,7 +17,7 @@
   ],
   "dependencies": {
     "@sanity/assist": "^3.2.0",
-    "@sanity/icons": "^3.6.0",
+    "@sanity/icons": "^3.7.0",
     "@sanity/vision": "^3.77.2",
     "date-fns": "^3.6.0",
     "pluralize-esm": "^9.0.5",
@@ -33,7 +33,7 @@
     "@types/react": "^18.3.12",
     "eslint": "^8.6.0",
     "prettier": "^3.5.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.2"
   },
   "prettier": {
     "semi": false,
