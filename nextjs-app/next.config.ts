@@ -97,6 +97,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/pdfs/Buffalo-Lake-Trail.pdf",
+        destination: "/projects/buffalo-lake-trail",
+        permanent: true,
+      },
+      {
         source: "/pdfs/CE-Trail.pdf",
         destination: "/projects/c-and-e-trail",
         permanent: true,
