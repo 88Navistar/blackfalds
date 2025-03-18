@@ -2,6 +2,7 @@ import CarouselOne from "@/components/modules/carousel-one";
 import FullWidthImage from "@/components/modules/FullWidthImage";
 import TextWrapImage from "@/components/modules/TextWrapImage";
 import CustomPortableText from "@/components/PortableText";
+
 import Acknowledgement from "./Acknowledgement";
 type Module<T = any> = {
   _type: string;
