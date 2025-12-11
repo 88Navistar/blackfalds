@@ -4,7 +4,8 @@ import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Crimson_Pro, Inter } from "next/font/google";
 import { draftMode } from "next/headers";
-import { toPlainText, VisualEditing } from "next-sanity";
+import { toPlainText } from "next-sanity";
+import { VisualEditing } from "next-sanity/visual-editing";
 import { Toaster } from "sonner";
 
 import DraftModeToast from "@/components/DraftModeToast";
