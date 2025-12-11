@@ -72,7 +72,7 @@ export default async function PostPage(props: Props) {
     return notFound();
   }
   const coverImageUrl = post.coverImage
-    ? urlForImage(post.coverImage)
+    ? urlForImage(post.coverImage as any)
     : undefined;
   const blogPosting: WithContext<Article> = {
     "@context": "https://schema.org",
