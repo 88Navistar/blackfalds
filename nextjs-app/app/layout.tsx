@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = settings?.title || demo.title;
   const description = settings?.description || demo.description;
 
-  const ogImage = resolveOpenGraphImage(settings?.ogImage);
+  const ogImage = resolveOpenGraphImage(settings?.ogImage as any);
   let metadataBase: URL | undefined;
   try {
     metadataBase = settings?.ogImage?.metadataBase
